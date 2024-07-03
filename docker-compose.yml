@@ -1,15 +1,18 @@
-version: '3.8'
+version: "3.9"
 
 services:
-  frontend:
-    build:
-      context: .
-      dockerfile: Dockerfile
+  app:
+    build: .
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./:/app
+    depends_on:
+      - nginx
+
+  nginx:
+    image: nginx:alpine
     ports:
       - "80:80"
-    networks:
-      - frontend-network
-
-networks:
-  frontend-network:
-    driver: bridge
+    volumes:
+      - ./build:/usr/share/nginx/html
