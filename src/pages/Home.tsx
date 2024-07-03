@@ -14,7 +14,7 @@ import favoriteIcon from "../assets/images/favorite-icon.webp";
 export function Home() {
   const products = Array.from({ length: 7 }, (_, i) => i);
 
-  let ulRefs = useRef<HTMLUListElement[]>([]);
+  const ulRefs = useRef<HTMLUListElement[]>([]);
   const moveScrollValue = 500;
 
   const moveScroll = (ul: number, value: number) => {

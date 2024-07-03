@@ -1,7 +1,7 @@
 {
-  "name": "vite-project",
+  "name": "developstore",
   "private": true,
-  "version": "0.0.0",
+  "version": "latest",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -28,7 +28,7 @@
     "typescript": "^5.2.2",
     "vite": "^5.3.1"
   },
-  "description": "This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.",
+  "description": "Develop Store E-Commerce.",
   "main": "index.js",
   "repository": {
     "type": "git",
