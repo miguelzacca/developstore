@@ -46,7 +46,7 @@ export function Auth({ login }: props) {
         </button>
         {login ? (
           <p>
-            Forgot password? <a href="recovery-passwd">Recovery password</a>
+            Forgot password? <a href="passwd-recovery">Recovery password</a>
           </p>
         ) : null}
       </form>

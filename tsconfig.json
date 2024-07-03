@@ -1,27 +1,4 @@
 {
-  // "compilerOptions": {
-  //   "baseUrl": "./src",
-  //   "paths": {
-  //     "@components/*": [
-  //       "components/*"
-  //     ],
-  //     "@assets/*": [
-  //       "assets/*"
-  //     ],
-  //     "@images/*": [
-  //       "images/*"
-  //     ],
-  //     "@styles/*": [
-  //       "styles/*"
-  //     ],
-  //     "@pages/*": [
-  //       "pages/*"
-  //     ],
-  //     "@utils/*": [
-  //       "utils/*"
-  //     ]
-  //   }
-  // },
   "files": [],
   "references": [
     {
