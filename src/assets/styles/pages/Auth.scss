@@ -1,0 +1,293 @@
+main#Auth {
+  width: 100%;
+  height: calc(100vh - 4rem);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+
+  &::before,
+  &::after {
+    content: "";
+    display: block;
+    position: absolute;
+    opacity: 0.5;
+    filter: blur(10rem);
+    width: 30rem;
+    aspect-ratio: 1;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    left: 50%;
+    opacity: 0;
+    border-radius: 50%;
+    z-index: -1;
+  }
+
+  &::before {
+    background-color: #ffba24;
+    animation: main-before 1s forwards;
+  }
+
+  &::after {
+    background-color: #ff4343;
+    animation: main-after 1s forwards;
+  }
+
+  form {
+    display: flex;
+    background-color: #fff;
+    z-index: 3;
+    flex-direction: column;
+    position: relative;
+    gap: 2rem;
+    overflow: hidden;
+    border-radius: 0.5rem;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    padding: 2rem;
+
+    h2 {
+      font-size: 3rem;
+      font-weight: 400;
+      margin-bottom: 2rem;
+      color: #fff;
+      padding: 2rem 0;
+      width: 100%;
+      text-align: center;
+      z-index: 3;
+    }
+
+    .header {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 12rem;
+      position: absolute;
+      top: 0;
+      left: 0;
+      background-image: linear-gradient(
+        110deg,
+        #ff4343 30%,
+        #fc6030,
+        #ffba24 100%
+      );
+    }
+
+    .input-container {
+      position: relative;
+      width: 100%;
+
+      input {
+        width: 30rem;
+        padding: 0.75rem 1rem;
+        color: var(--black);
+        border: 0.1rem solid #00000075;
+        border-radius: 0.2rem;
+        background-color: transparent;
+
+        &:focus {
+          border: 0.1rem solid #000000bb;
+        }
+
+        &:focus,
+        &:not(:placeholder-shown) {
+          & ~ label {
+            top: 0;
+            font-size: 1.3rem;
+          }
+        }
+      }
+
+      label {
+        position: absolute;
+        top: 50%;
+        left: 1.5rem;
+        font-size: 1.5rem;
+        transform: translateY(-50%);
+        color: var(--gray);
+        transition: all 0.2s;
+        background-color: #fff;
+        padding: 0 0.5rem;
+      }
+    }
+
+    button {
+      width: 40%;
+      border: none;
+      height: 4rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      background-color: #fff;
+      border: none;
+      overflow: hidden;
+      transition: all 0.3s;
+
+      &:hover {
+        box-shadow: 0 0 20px #ff4343, 0 0 10px #ff4343, 0 0 5px #ff4343;
+        background-color: #ff4343;
+        cursor: pointer;
+        color: #fff;
+      }
+
+      div {
+        position: absolute;
+      }
+
+      .left {
+        background-image: linear-gradient(to top, transparent, #ff4343);
+        position: absolute;
+        height: 100%;
+        width: 2px;
+        left: 0;
+        top: 100%;
+        animation: animeL 1s linear infinite;
+      }
+
+      .top {
+        background-image: linear-gradient(to right, transparent, #ff4343);
+        position: absolute;
+        width: 100%;
+        height: 2px;
+        top: 0;
+        left: -100%;
+        animation: animeT 1s linear infinite;
+        animation-delay: 0.5s;
+      }
+
+      .right {
+        background-image: linear-gradient(to bottom, transparent, #ff4343);
+        position: absolute;
+        height: 100%;
+        width: 2px;
+        right: 0;
+        bottom: 100%;
+        animation: animeR 1s linear infinite;
+      }
+
+      .bottom {
+        background-image: linear-gradient(to left, transparent, #ff4343);
+        position: absolute;
+        width: 100%;
+        height: 2px;
+        bottom: 0;
+        right: -100%;
+        animation: animeB 1s linear infinite;
+        animation-delay: 0.5s;
+      }
+
+      @keyframes animeL {
+        100% {
+          top: -100%;
+        }
+      }
+
+      @keyframes animeT {
+        100% {
+          left: 100%;
+        }
+      }
+
+      @keyframes animeR {
+        100% {
+          bottom: -100%;
+        }
+      }
+
+      @keyframes animeB {
+        100% {
+          right: 100%;
+        }
+      }
+    }
+
+    p {
+      font-size: 1.4rem;
+      color: var(--gray);
+
+      a {
+        color: #00388b;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+}
+
+@keyframes main-before {
+  to {
+    transform: translate(-100%, -100%);
+    opacity: 0.7;
+  }
+}
+
+@keyframes main-after {
+  to {
+    transform: translate(0%, 0%);
+    opacity: 0.7;
+  }
+}
+
+#msg {
+  position: absolute;
+  top: 3rem;
+  right: 3rem;
+  background-color: #fff;
+  z-index: 99;
+  border-left: 0.3rem solid #ff4343;
+  border-radius: 0.5rem;
+  padding: 2rem 4rem;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  font-size: 1.6rem;
+  color: var(--black);
+  transform: translateY(-100%);
+  opacity: 0;
+  max-width: 40rem;
+
+  &.msg-anime {
+    animation: msg 5s linear;
+  }
+
+  @keyframes msg {
+    5%,
+    95% {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+}
+
+#handleAuthPage {
+  position: fixed;
+  bottom: 3rem;
+  right: 3rem;
+  z-index: 99;
+  padding: 1rem 2rem;
+  background-color: #5f5;
+  border: 0.2rem solid transparent;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  transition: all 0.25s;
+  color: #fff;
+  font-size: 1.6rem;
+  border-radius: 1rem;
+
+  &:hover {
+    border-color: #5f5;
+    background-color: #fff;
+    color: #5f5;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  form {
+    width: 100%;
+  }
+
+  #msg {
+    max-width: 75%;
+    padding: 1.5rem;
+  }
+}

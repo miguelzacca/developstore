@@ -20,9 +20,14 @@ export function Account() {
         mainTag.current.textContent = "SUCCESS";
       }
     })
-    .catch((err) => console.error(err));
+    .catch((err) => {
+      console.error(err);
+      location.href = "/login"
+    });
 
-  return <>
-    <main id="Account" ref={mainTag}></main>
-  </>
+  return (
+    <>
+      <main id="Account" ref={mainTag}></main>
+    </>
+  );
 }

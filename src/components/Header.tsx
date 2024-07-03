@@ -13,7 +13,7 @@ interface props {
 export function Header({ path }: props) {
   const block = Array.from({ length: 16 }, (_, i) => i);
 
-  return <>
+  return (
     <header>
       <div className="high-container">
         <a href="/" className="refresh-link">
@@ -52,7 +52,7 @@ export function Header({ path }: props) {
             <a href="/#best-products">The best</a>
           </div>
         </details>
-        <div className="path">{path}</div>
+        <div className="path">{`> ${path}`}</div>
       </div>
       <div id="blocks-container">
         <div className="view"></div>
@@ -61,5 +61,5 @@ export function Header({ path }: props) {
         ))}
       </div>
     </header>
-  </>
+  );
 }

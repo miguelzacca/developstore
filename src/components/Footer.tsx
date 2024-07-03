@@ -15,7 +15,7 @@ import githubImg from "../assets/images/github.webp";
 import logoImg from "../assets/images/logo.webp";
 
 export function Footer() {
-  return <>
+  return (
     <footer>
       <div className="benefits-container">
         <div className="container">
@@ -59,7 +59,7 @@ export function Footer() {
             e-commerce dev
           </p>
         </div>
-        <div className="payment-methods" >
+        <div className="payment-methods">
           <img src={visaPaymentImg} alt="Visa icon" />
           <img src={mastercardPaymentImg} alt="Mastercard icon" />
           <img src={pixPaymentImg} alt="Pix icon" />
@@ -82,5 +82,5 @@ export function Footer() {
         </div>
       </div>
     </footer>
-  </>
+  );
 }
