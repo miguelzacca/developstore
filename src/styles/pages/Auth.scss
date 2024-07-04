@@ -196,10 +196,10 @@ main#Auth {
   }
 
   #handleAuthPage {
-    left: 50%;
-    transform: translateX(-50%);
+    left: 1.5rem;
     width: min-content;
-    bottom: 1.5rem;
+    top: 1.5rem;
+    height: min-content;
   }
 
   #msg {
