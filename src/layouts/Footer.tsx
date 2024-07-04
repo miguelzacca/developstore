@@ -1,18 +1,18 @@
-import "../assets/styles/components/Footer.scss";
+import "../styles/layouts/Footer.scss";
 
-import deliveryImg from "../assets/images/delivery.webp";
-import payReturnImg from "../assets/images/pay-return.webp";
-import securePayImg from "../assets/images/secure-pay.webp";
-import supportImg from "../assets/images/support.webp";
-import searchIcon from "../assets/images/search-icon.webp";
-import visaPaymentImg from "../assets/images/visa-payment.webp";
-import mastercardPaymentImg from "../assets/images/mastercard-payment.webp";
-import pixPaymentImg from "../assets/images/pix-payment.webp";
-import stripePaymentImg from "../assets/images/stripe-payment.webp";
-import emailImg from "../assets/images/email.webp";
-import linkedinImg from "../assets/images/linkedin.webp";
-import githubImg from "../assets/images/github.webp";
-import logoImg from "../assets/images/logo.webp";
+import deliveryImg from "/public/delivery.webp";
+import payReturnImg from "/public/pay-return.webp";
+import securePayImg from "/public/secure-pay.webp";
+import supportImg from "/public/support.webp";
+import searchIcon from "/public/search-icon.webp";
+import visaPaymentImg from "/public/visa-payment.webp";
+import mastercardPaymentImg from "/public/mastercard-payment.webp";
+import pixPaymentImg from "/public/pix-payment.webp";
+import stripePaymentImg from "/public/stripe-payment.webp";
+import emailImg from "/public/email.webp";
+import linkedinImg from "/public/linkedin.webp";
+import githubImg from "/public/github.webp";
+import logoImg from "/public/logo.webp";
 
 export function Footer() {
   return (

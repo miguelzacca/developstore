@@ -1,15 +1,14 @@
 import { useRef } from "react";
 
-import "../assets/styles/pages/Home.scss";
+import "../styles/pages/Home.scss";
+import { Header } from "../layouts/Header";
+import { Footer } from "../layouts/Footer";
 
-import { Header } from "../components/Header";
-import { Footer } from "../components/Footer";
-
-import productImg from "../assets/images/product.webp";
-import shoppingIcon from "../assets/images/shopping-icon.webp";
-import arrowLeftImg from "../assets/images/arrow-left.webp";
-import arrowRightImg from "../assets/images/arrow-right.webp";
-import favoriteIcon from "../assets/images/favorite-icon.webp";
+import productImg from "/public/product.webp";
+import shoppingIcon from "/public/shopping-icon.webp";
+import arrowLeftImg from "/public/arrow-left.webp";
+import arrowRightImg from "/public/arrow-right.webp";
+import favoriteIcon from "/public/favorite-icon.webp";
 
 export function Home() {
   const products = Array.from({ length: 7 }, (_, i) => i);

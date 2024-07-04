@@ -1,4 +1,4 @@
-import "../assets/styles/pages/Auth.scss";
+import "../styles/pages/Auth.scss";
 
 interface props {
   request: boolean;

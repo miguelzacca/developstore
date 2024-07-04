@@ -1,6 +1,6 @@
 import { useRef } from "react";
 
-import "../assets/styles/pages/Account.scss";
+import "../styles/pages/Account.scss";
 import config from "../config";
 
 export function Account() {

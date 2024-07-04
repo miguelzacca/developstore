@@ -1,0 +1,90 @@
+button#animeButton {
+  width: 40%;
+  border: none;
+  height: 4rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  background-color: #fff;
+  border: none;
+  overflow: hidden;
+  transition: all 0.3s;
+
+  &:hover {
+    box-shadow: 0 0 20px #ff4343, 0 0 10px #ff4343, 0 0 5px #ff4343;
+    background-color: #ff4343;
+    cursor: pointer;
+    color: #fff;
+  }
+
+  div {
+    position: absolute;
+  }
+
+  .left {
+    background-image: linear-gradient(to top, transparent, #ff4343);
+    position: absolute;
+    height: 100%;
+    width: 2px;
+    left: 0;
+    top: 100%;
+    animation: animeL 1s linear infinite;
+  }
+
+  .top {
+    background-image: linear-gradient(to right, transparent, #ff4343);
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    top: 0;
+    left: -100%;
+    animation: animeT 1s linear infinite;
+    animation-delay: 0.5s;
+  }
+
+  .right {
+    background-image: linear-gradient(to bottom, transparent, #ff4343);
+    position: absolute;
+    height: 100%;
+    width: 2px;
+    right: 0;
+    bottom: 100%;
+    animation: animeR 1s linear infinite;
+  }
+
+  .bottom {
+    background-image: linear-gradient(to left, transparent, #ff4343);
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    bottom: 0;
+    right: -100%;
+    animation: animeB 1s linear infinite;
+    animation-delay: 0.5s;
+  }
+
+  @keyframes animeL {
+    100% {
+      top: -100%;
+    }
+  }
+
+  @keyframes animeT {
+    100% {
+      left: 100%;
+    }
+  }
+
+  @keyframes animeR {
+    100% {
+      bottom: -100%;
+    }
+  }
+
+  @keyframes animeB {
+    100% {
+      right: 100%;
+    }
+  }
+}

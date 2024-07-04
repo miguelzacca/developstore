@@ -1,10 +1,10 @@
-import "../assets/styles/components/Header.scss";
+import "../styles/layouts/Header.scss";
 
-import logoImg from "../assets/images/logo.webp";
-import searchIcon from "../assets/images/search-icon.webp";
-import accountIcon from "../assets/images/account-icon.webp";
-import favoriteIcon from "../assets/images/favorite-icon.webp";
-import shoppingIcon from "../assets/images/shopping-icon.webp";
+import logoImg from "/public/logo.webp";
+import searchIcon from "/public/search-icon.webp";
+import accountIcon from "/public/account-icon.webp";
+import favoriteIcon from "/public/favorite-icon.webp";
+import shoppingIcon from "/public/shopping-icon.webp";
 
 interface props {
   path: string;
