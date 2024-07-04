@@ -24,12 +24,11 @@ export function Register() {
     })
       .then(async (res) => {
         const data = await res.json();
-        utils.handleMsg(data, msgRef);
 
-        if (res.ok) {
-          await utils.wait(1000);
-          location.href = "/verify-email";
+        if (!res.ok) {
+          return utils.handleMsg(data, msgRef);
         }
+        utils.handleMsg({ msg: "Verify your email." }, msgRef);
       })
       .catch((err) => console.error(err));
   };

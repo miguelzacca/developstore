@@ -1,7 +1,7 @@
 import "../styles/layouts/Header.scss";
+import { SearchInput } from "../components/SearchInput";
 
 import logoImg from "/public/logo.webp";
-import searchIcon from "/public/search-icon.webp";
 import accountIcon from "/public/account-icon.webp";
 import favoriteIcon from "/public/favorite-icon.webp";
 import shoppingIcon from "/public/shopping-icon.webp";
@@ -19,17 +19,7 @@ export function Header({ path }: props) {
         <a href="/" className="refresh-link">
           <img src={logoImg} className="logo" alt="Logo" />
         </a>
-        <div className="search-container">
-          <input
-            type="search"
-            name="query"
-            id="search-input-hed"
-            placeholder="Search product"
-          />
-          <button id="search-button">
-            <img src={searchIcon} alt="Search icon" />
-          </button>
-        </div>
+        <SearchInput id="search-input-header" />
         <nav>
           <a href="./account" className="account-link">
             <img src={accountIcon} alt="Account icon" />

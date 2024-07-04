@@ -1,10 +1,10 @@
 import "../styles/layouts/Footer.scss";
+import { SearchInput } from "../components/SearchInput";
 
 import deliveryImg from "/public/delivery.webp";
 import payReturnImg from "/public/pay-return.webp";
 import securePayImg from "/public/secure-pay.webp";
 import supportImg from "/public/support.webp";
-import searchIcon from "/public/search-icon.webp";
 import visaPaymentImg from "/public/visa-payment.webp";
 import mastercardPaymentImg from "/public/mastercard-payment.webp";
 import pixPaymentImg from "/public/pix-payment.webp";
@@ -37,17 +37,7 @@ export function Footer() {
       </div>
       <div className="footer-search-container">
         <h2>Start your search</h2>
-        <div className="search-container">
-          <input
-            type="search"
-            name="query"
-            id="search-input-foo"
-            placeholder="Search product"
-          />
-          <button id="search-button">
-            <img src={searchIcon} alt="Search icon" />
-          </button>
-        </div>
+        <SearchInput id="search-input-footer" />
       </div>
       <div className="main-container">
         <div className="site-profile">

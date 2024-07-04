@@ -1,4 +1,4 @@
-import "../styles/components/animeButton.scss";
+import "../styles/components/AnimeButton.scss";
 
 export function AnimeButton() {
   return (

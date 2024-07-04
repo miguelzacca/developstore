@@ -25,10 +25,10 @@
     width: 0;
     transform: translate(-50%, -50%);
     aspect-ratio: 1;
-    filter: blur(3rem);
+    filter: blur(2rem);
     z-index: -1;
     border-radius: 50%;
-    background-color: #ffd000;
+    background-color: #ffd000dd;
     opacity: 0.3;
     animation: view-blocks 1s linear forwards;
     animation-delay: 1s;
@@ -37,7 +37,7 @@
 
 @keyframes view-blocks {
   to {
-    width: 35rem;
+    width: 30rem;
   }
 }
 
@@ -169,13 +169,6 @@ header .logo {
     .search-container {
       position: absolute;
       top: 14rem;
-      width: calc(100% - 4rem);
-      justify-content: center;
-      align-items: center;
-
-      input {
-        max-width: calc(100% - 4rem);
-      }
     }
   }
 }

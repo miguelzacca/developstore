@@ -1,5 +1,3 @@
-"use strict";
-
 import { RefObject } from "react";
 
 interface IObjKey {

@@ -118,16 +118,20 @@ main#Home {
         gap: 1rem;
         font-size: 1.5rem;
         border-radius: 0.5rem;
-        transition: filter 0.3s;
+        transition: filter 0.3s, scale .1s;
+
+        img {
+          filter: invert(1);
+          height: 2rem;
+        }
 
         &:hover {
           filter: invert(1);
           box-shadow: 0 0 1.5rem #ffffff25;
         }
 
-        img {
-          filter: invert(1);
-          height: 2rem;
+        &:active {
+          scale: 0.9;
         }
       }
     }
@@ -253,7 +257,7 @@ main#Home {
 
         #buy {
           width: 3rem;
-          height: 3rem;
+          aspect-ratio: 1;
           display: flex;
           justify-content: center;
           align-items: center;
@@ -266,12 +270,18 @@ main#Home {
           right: 0.5rem;
           bottom: 0.5rem;
           padding-left: 0.15rem;
-          transition: 0.3s;
+          transition: 0.3s all;
 
-          &:hover {
+          &:hover:not(&:active) {
             filter: invert(1);
+            transform: rotate(360deg);
             background-color: #444;
-            outline: #000 solid 1rem;
+            outline: #000 solid 0.75rem;
+          }
+
+          &:active {
+            transition: 0.1s all;
+            scale: 0.7;
           }
         }
       }
@@ -325,7 +335,7 @@ main#Home {
   }
 
   main {
-    margin-top: 5rem;
+    margin-top: 7rem;
 
     .sales-container {
       padding: 5rem 2rem !important;

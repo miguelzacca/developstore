@@ -195,6 +195,13 @@ main#Auth {
     width: 100%;
   }
 
+  #handleAuthPage {
+    left: 50%;
+    transform: translateX(-50%);
+    width: min-content;
+    bottom: 1.5rem;
+  }
+
   #msg {
     max-width: 75%;
     padding: 1.5rem;
