@@ -14,7 +14,7 @@ export function Login() {
     const formData = new FormData(form.current);
     const jsonData = utils.formDataToJson(formData);
 
-    fetch(`${config.API_URL}/api/auth/login`, {
+    fetch(`${config.API_URL}/auth/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

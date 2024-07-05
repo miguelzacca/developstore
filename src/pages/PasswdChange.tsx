@@ -14,7 +14,7 @@ export function PasswdChange() {
     const formData = new FormData(form.current);
     const jsonData = utils.formDataToJson(formData);
 
-    fetch(`${config.API_URL}/api/user/change-passwd`, {
+    fetch(`${config.API_URL}/user/change-passwd`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",

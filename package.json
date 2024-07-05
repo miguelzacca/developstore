@@ -12,8 +12,7 @@
   "dependencies": {
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "react-router-dom": "^6.24.0",
-    "sass": "^1.77.6"
+    "react-router-dom": "^6.24.0"
   },
   "devDependencies": {
     "@types/node": "^20.14.9",
@@ -25,6 +24,7 @@
     "eslint": "^8.57.0",
     "eslint-plugin-react-hooks": "^4.6.2",
     "eslint-plugin-react-refresh": "^0.4.7",
+    "sass": "^1.77.6",
     "typescript": "^5.2.2",
     "vite": "^5.3.1"
   },

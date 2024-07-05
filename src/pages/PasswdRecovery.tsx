@@ -16,7 +16,7 @@ export function PasswdRecovery() {
 
     const email = JSON.parse(jsonData).email;
 
-    fetch(`${config.API_URL}/api/auth/passwd-recovery/${email}`, {
+    fetch(`${config.API_URL}/auth/passwd-recovery/${email}`, {
       credentials: "include",
     })
       .then(async (res) => {

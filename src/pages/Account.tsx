@@ -22,12 +22,8 @@ export function Account() {
     })
     .catch((err) => {
       console.error(err);
-      location.href = "/login"
+      location.href = "/login";
     });
 
-  return (
-    <>
-      <main id="Account" ref={mainTag}></main>
-    </>
-  );
+  return <main id="Account" ref={mainTag}></main>;
 }

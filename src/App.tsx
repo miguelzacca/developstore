@@ -1,4 +1,5 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route,  } from "react-router-dom";
+import { PrivateRoute } from "./components/PrivateRoute.tsx";
 
 import { Home } from "./pages/Home.tsx";
 import { Account } from "./pages/Account.tsx";
@@ -16,7 +17,15 @@ export function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/passwd-recovery" element={<PasswdRecovery />} />
-        <Route path="/passwd-change" element={<PasswdChange />} />
+        <Route
+          path="/passwd-change/:token"
+          element={
+            <PrivateRoute>
+              <PasswdChange />
+            </PrivateRoute>
+          }
+        />
+        <Route path="*" element={<Home />} />
       </Routes>
     </Router>
   );
