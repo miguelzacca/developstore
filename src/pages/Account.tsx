@@ -8,7 +8,7 @@ export function Account() {
 
   const mainTag = useRef<HTMLElement>(null);
 
-  fetch(`${config.API_URL}/api/user`, {
+  fetch(`${config.API_HOST}/user`, {
     credentials: "include",
   })
     .then((res) => {

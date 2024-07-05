@@ -14,7 +14,7 @@ export function Register() {
     const formData = new FormData(form.current);
     const jsonData = utils.formDataToJson(formData);
 
-    fetch(`${config.API_URL}/auth/register`, {
+    fetch(`${config.API_HOST}/auth/register`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
