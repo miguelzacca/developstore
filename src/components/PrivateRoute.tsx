@@ -13,7 +13,7 @@ export function PrivateRoute({ children }: props) {
   const [access, setAccess] = useState(false);
 
   useEffect(() => {
-    fetch(`${config.API_HOST}/auth/token-validator/${token}?setCookie=${true}`, {
+    fetch(`${config.API_HOST}/auth/token-validator/${token}?setCookie=true`, {
       credentials: "include",
     })
       .then((res) => {
@@ -23,7 +23,7 @@ export function PrivateRoute({ children }: props) {
       })
       .catch((err) => console.error(err))
       .finally(() => setLoading(false));
-  }, []);
+  }, [token]);
 
   if (loading) {
     return null;
