@@ -11,8 +11,6 @@ interface props {
 }
 
 export function Header({ path }: props) {
-  const block = Array.from({ length: 16 }, (_, i) => i);
-
   return (
     <header>
       <div className="high-container">
@@ -43,12 +41,6 @@ export function Header({ path }: props) {
           </div>
         </details>
         <div className="path">{`> ${path}`}</div>
-      </div>
-      <div id="blocks-container">
-        <div className="view"></div>
-        {block.map((i) => (
-          <div key={i} className="block"></div>
-        ))}
       </div>
     </header>
   );

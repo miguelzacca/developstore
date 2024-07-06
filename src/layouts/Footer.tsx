@@ -57,7 +57,6 @@ export function Footer() {
         </div>
         <div className="contact">
           <p className="number">+55 (48) 99664-7429</p>
-          <p className="info-number">Personal telephone</p>
           <div className="links">
             <a href="./support.html">
               <img src={emailImg} alt="Email icon" />

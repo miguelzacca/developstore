@@ -4,8 +4,6 @@ import "../styles/pages/Account.scss";
 import config from "../config";
 
 export function Account() {
-  localStorage.clear();
-
   const mainTag = useRef<HTMLElement>(null);
 
   fetch(`${config.API_HOST}/user`, {

@@ -7,6 +7,7 @@ footer {
     display: flex;
     align-items: center;
     justify-content: space-around;
+    border-radius: 1rem;
 
     h2 {
       font-size: 2.2rem;
@@ -56,8 +57,13 @@ footer {
       align-items: end;
       justify-content: start;
 
-      .info-number {
+      .number {
         font-size: 1.2rem;
+        color: #333;
+      }
+
+      .info-number {
+        font-size: 1.1rem;
         color: var(--gray);
       }
 
@@ -119,31 +125,67 @@ footer {
       }
     }
 
+    .footer-search-container {
+      width: calc(100% + 3rem);
+      transform: translateX(-1.5rem);
+      border-radius: 0;
+    }
+
     .footer-search-container,
     .main-container {
       flex-direction: column;
-      gap: 2rem;
+      align-items: center;
+      gap: 3rem;
 
       .search-container {
-        max-width: calc(100% - 4rem);
+        max-width: calc(100% - 2.5rem);
       }
 
       .site-profile {
         width: 100%;
         display: flex;
         align-items: center;
+        justify-content: center;
         gap: 2rem;
+        padding-bottom: 2rem;
+        border-bottom: 0.2rem solid var(--light-gray);
+
+        img {
+          scale: 1.2;
+        }
       }
 
       .payment-methods {
-        justify-content: start;
+        justify-content: space-evenly;
+        width: 100%;
+        padding-bottom: 3rem;
+        border-bottom: 0.2rem solid var(--light-gray);
+
+        img {
+          scale: 1.2;
+        }
       }
 
       .contact {
-        align-items: start;
+        align-items: center;
+        width: 100%;
+        padding-bottom: 2rem;
+        gap: 1rem;
+
+        .number {
+          color: var(--gray);
+          font-size: 1.3rem;
+        }
 
         .links {
           margin-top: 1rem;
+          width: 100%;
+          justify-content: center;
+          gap: 3rem;
+
+          img {
+            scale: 1.2;
+          }
         }
       }
     }
