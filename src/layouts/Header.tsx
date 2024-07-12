@@ -1,13 +1,13 @@
-import "../styles/layouts/Header.scss";
-import { SearchInput } from "../components/SearchInput";
+import '../styles/layouts/Header.scss'
+import { SearchInput } from '../components/SearchInput'
 
-import logoImg from "/public/logo.webp";
-import accountIcon from "/public/account-icon.webp";
-import favoriteIcon from "/public/favorite-icon.webp";
-import shoppingIcon from "/public/shopping-icon.webp";
+import logoImg from '/public/logo.webp'
+import accountIcon from '/public/account-icon.webp'
+import favoriteIcon from '/public/favorite-icon.webp'
+import shoppingIcon from '/public/shopping-icon.webp'
 
 interface props {
-  path: string;
+  path: string
 }
 
 export function Header({ path }: props) {
@@ -43,5 +43,5 @@ export function Header({ path }: props) {
         <div className="path">{`> ${path}`}</div>
       </div>
     </header>
-  );
+  )
 }

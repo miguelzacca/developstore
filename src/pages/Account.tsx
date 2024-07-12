@@ -1,27 +1,25 @@
-import { useRef } from "react";
-
-import "../styles/pages/Account.scss";
-import config from "../config";
+import { useRef } from 'react'
+import '../styles/pages/Account.scss'
 
 export function Account() {
-  const mainTag = useRef<HTMLElement>(null);
+  const mainTag = useRef<HTMLElement>(null)
 
-  fetch(`${config.API_HOST}/user`, {
-    credentials: "include",
+  fetch(`${import.meta.env['VITE_API_HOST']}/user`, {
+    credentials: 'include',
   })
     .then((res) => {
       if (!res.ok) {
-        return (location.href = "/login");
+        return (location.href = '/login')
       }
 
       if (mainTag.current) {
-        mainTag.current.textContent = "SUCCESS";
+        mainTag.current.textContent = 'SUCCESS'
       }
     })
     .catch((err) => {
-      console.error(err);
-      location.href = "/login";
-    });
+      console.error(err)
+      location.href = '/login'
+    })
 
-  return <main id="Account" ref={mainTag}></main>;
+  return <main id="Account" ref={mainTag}></main>
 }

@@ -1,18 +1,18 @@
-import "../styles/layouts/Footer.scss";
-import { SearchInput } from "../components/SearchInput";
+import '../styles/layouts/Footer.scss'
+import { SearchInput } from '../components/SearchInput'
 
-import deliveryImg from "/public/delivery.webp";
-import payReturnImg from "/public/pay-return.webp";
-import securePayImg from "/public/secure-pay.webp";
-import supportImg from "/public/support.webp";
-import visaPaymentImg from "/public/visa-payment.webp";
-import mastercardPaymentImg from "/public/mastercard-payment.webp";
-import pixPaymentImg from "/public/pix-payment.webp";
-import stripePaymentImg from "/public/stripe-payment.webp";
-import emailImg from "/public/email.webp";
-import linkedinImg from "/public/linkedin.webp";
-import githubImg from "/public/github.webp";
-import logoImg from "/public/logo.webp";
+import deliveryImg from '/public/delivery.webp'
+import payReturnImg from '/public/pay-return.webp'
+import securePayImg from '/public/secure-pay.webp'
+import supportImg from '/public/support.webp'
+import visaPaymentImg from '/public/visa-payment.webp'
+import mastercardPaymentImg from '/public/mastercard-payment.webp'
+import pixPaymentImg from '/public/pix-payment.webp'
+import stripePaymentImg from '/public/stripe-payment.webp'
+import emailImg from '/public/email.webp'
+import linkedinImg from '/public/linkedin.webp'
+import githubImg from '/public/github.webp'
+import logoImg from '/public/logo.webp'
 
 export function Footer() {
   return (
@@ -71,5 +71,5 @@ export function Footer() {
         </div>
       </div>
     </footer>
-  );
+  )
 }

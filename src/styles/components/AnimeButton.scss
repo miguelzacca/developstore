@@ -1,4 +1,6 @@
 button#animeButton {
+  --red-color: #ff4343;
+
   width: 40%;
   border: none;
   height: 4rem;
@@ -11,11 +13,20 @@ button#animeButton {
   overflow: hidden;
   transition: all 0.3s;
 
-  &:hover {
-    box-shadow: 0 0 20px #ff4343, 0 0 10px #ff4343, 0 0 5px #ff4343;
-    background-color: #ff4343;
+  p {
+    color: var(--black) !important;
+    transition: all 0.3s;
+  }
+
+  &:hover:not(&.loading) {
+    box-shadow: 0 0 20px var(--red-color), 0 0 10px var(--red-color),
+      0 0 5px var(--red-color);
+    background-color: var(--red-color);
     cursor: pointer;
-    color: #fff;
+
+    p {
+      color: #fff !important;
+    }
   }
 
   div {
@@ -23,7 +34,7 @@ button#animeButton {
   }
 
   .left {
-    background-image: linear-gradient(to top, transparent, #ff4343);
+    background-image: linear-gradient(to top, transparent, var(--red-color));
     position: absolute;
     height: 100%;
     width: 2px;
@@ -33,7 +44,7 @@ button#animeButton {
   }
 
   .top {
-    background-image: linear-gradient(to right, transparent, #ff4343);
+    background-image: linear-gradient(to right, transparent, var(--red-color));
     position: absolute;
     width: 100%;
     height: 2px;
@@ -44,7 +55,7 @@ button#animeButton {
   }
 
   .right {
-    background-image: linear-gradient(to bottom, transparent, #ff4343);
+    background-image: linear-gradient(to bottom, transparent, var(--red-color));
     position: absolute;
     height: 100%;
     width: 2px;
@@ -54,7 +65,7 @@ button#animeButton {
   }
 
   .bottom {
-    background-image: linear-gradient(to left, transparent, #ff4343);
+    background-image: linear-gradient(to left, transparent, var(--red-color));
     position: absolute;
     width: 100%;
     height: 2px;
@@ -85,6 +96,49 @@ button#animeButton {
   @keyframes animeB {
     100% {
       right: 100%;
+    }
+  }
+
+  .loading-container {
+    display: none;
+    position: relative;
+    width: 2rem;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background-image: conic-gradient(transparent 20%, var(--red-color));
+    animation: loading-anime 1s linear infinite;
+
+    &::before {
+      content: "";
+      display: block;
+      background-color: #fff;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: 1.6rem;
+      aspect-ratio: 1;
+      border-radius: 50%;
+    }
+
+    @keyframes loading-anime {
+      100% {
+        rotate: 360deg;
+      }
+    }
+  }
+
+  &.loading {
+    cursor: default;
+    transition: none !important;
+
+    p,
+    div {
+      display: none;
+    }
+
+    .loading-container {
+      display: block;
     }
   }
 }

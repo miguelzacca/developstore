@@ -1,8 +1,8 @@
-import "../styles/components/SearchInput.scss";
-import searchIcon from "/public/search-icon.webp";
+import "../styles/components/SearchInput.scss"
+import searchIcon from "/public/search-icon.webp"
 
 interface props {
-  id: string;
+  id: string
 }
 
 export function SearchInput({ id }: props) {
@@ -16,5 +16,5 @@ export function SearchInput({ id }: props) {
         <img src={searchIcon} alt="Search icon" />
       </button>
     </div>
-  );
+  )
 }

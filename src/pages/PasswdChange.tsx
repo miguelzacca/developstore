@@ -1,44 +1,47 @@
-import { useRef, FormEvent } from "react";
+import { useRef, FormEvent, useState } from 'react'
+import '../styles/pages/Auth.scss'
 
-import "../styles/pages/Auth.scss";
-import { AnimeButton } from "../components/AnimeButton";
+import { AnimeButton } from '../components/AnimeButton'
+import utils from '../utils'
 
-import utils from "../utils";
-import config from "../config";
+const { VITE_API_HOST } = import.meta.env
 
 export function PasswdChange() {
-  const form = useRef<HTMLFormElement>(document.createElement("form"));
-  const msgRef = useRef<HTMLDivElement>(null);
+  const form = useRef<HTMLFormElement>(document.createElement('form'))
+  const msgRef = useRef<HTMLDivElement>(null)
+  const [isPending, setPending] = useState(false)
 
   const changePasswd = () => {
-    const formData = new FormData(form.current);
-    const jsonData = utils.formDataToJson(formData);
+    const formData = new FormData(form.current)
+    const jsonData = utils.formDataToJson(formData)
 
-    fetch(`${config.API_HOST}/user/change-passwd`, {
-      method: "PATCH",
+    setPending(true)
+    fetch(`${VITE_API_HOST}/user/change-passwd`, {
+      method: 'PATCH',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
       body: jsonData,
-      credentials: "include",
+      credentials: 'include',
     })
       .then(async (res) => {
-        const data = await res.json();
-        utils.handleMsg(data, msgRef);
+        const data = await res.json()
+        utils.handleMsg(data, msgRef)
 
         if (res.ok) {
-          await utils.wait(1000);
-          location.href = "/login";
+          await utils.wait(1000)
+          location.href = '/login'
         }
       })
-      .catch((err) => console.error(err));
-  };
+      .catch((err) => console.error(err))
+      .finally(() => setPending(false))
+  }
 
   const handleFormSubmit = (e: FormEvent) => {
-    e.preventDefault();
-    changePasswd();
-    form.current.reset();
-  };
+    e.preventDefault()
+    changePasswd()
+    form.current.reset()
+  }
 
   return (
     <main id="Auth">
@@ -56,8 +59,8 @@ export function PasswdChange() {
           />
           <label htmlFor="passwd">Password</label>
         </div>
-        <AnimeButton />
+        <AnimeButton loading={isPending} />
       </form>
     </main>
-  );
+  )
 }

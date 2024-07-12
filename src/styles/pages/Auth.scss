@@ -193,6 +193,10 @@ main#Auth {
 @media screen and (max-width: 768px) {
   form {
     width: 100%;
+
+    input {
+      width: 100% !important;
+    }
   }
 
   #handleAuthPage {

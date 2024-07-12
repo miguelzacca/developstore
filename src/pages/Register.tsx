@@ -1,43 +1,46 @@
-import { useRef, FormEvent } from "react";
+import { useRef, FormEvent, useState } from 'react'
+import '../styles/pages/Auth.scss'
 
-import "../styles/pages/Auth.scss";
-import { AnimeButton } from "../components/AnimeButton";
+import { AnimeButton } from '../components/AnimeButton'
+import utils from '../utils'
 
-import utils from "../utils";
-import config from "../config";
+const { VITE_API_HOST } = import.meta.env
 
 export function Register() {
-  const form = useRef<HTMLFormElement>(document.createElement("form"));
-  const msgRef = useRef<HTMLDivElement>(null);
+  const form = useRef<HTMLFormElement>(document.createElement('form'))
+  const msgRef = useRef<HTMLDivElement>(null)
+  const [isPending, setPending] = useState(false)
 
   const registerRequest = () => {
-    const formData = new FormData(form.current);
-    const jsonData = utils.formDataToJson(formData);
+    const formData = new FormData(form.current)
+    const jsonData = utils.formDataToJson(formData)
 
-    fetch(`${config.API_HOST}/auth/register`, {
-      method: "POST",
+    setPending(true)
+    fetch(`${VITE_API_HOST}/auth/register`, {
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
       body: jsonData,
-      credentials: "include",
+      credentials: 'include',
     })
       .then(async (res) => {
-        const data = await res.json();
+        const data = await res.json()
 
         if (!res.ok) {
-          return utils.handleMsg(data, msgRef);
+          return utils.handleMsg(data, msgRef)
         }
-        utils.handleMsg({ msg: "Verify your email." }, msgRef);
+        utils.handleMsg({ msg: 'Verify your email.' }, msgRef)
       })
-      .catch((err) => console.error(err));
-  };
+      .catch((err) => console.error(err))
+      .finally(() => setPending(false))
+  }
 
   const handleFormSubmit = (e: FormEvent) => {
-    e.preventDefault();
-    registerRequest();
-    form.current.reset();
-  };
+    e.preventDefault()
+    registerRequest()
+    form.current.reset()
+  }
 
   return (
     <main id="Auth">
@@ -69,11 +72,11 @@ export function Register() {
           />
           <label htmlFor="passwd">Password</label>
         </div>
-        <AnimeButton />
+        <AnimeButton loading={isPending} />
       </form>
       <a id="handleAuthPage" href="login">
         Login
       </a>
     </main>
-  );
+  )
 }

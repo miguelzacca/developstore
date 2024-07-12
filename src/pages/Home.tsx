@@ -1,31 +1,31 @@
-import { useRef } from "react";
+import { useRef } from 'react'
 
-import "../styles/pages/Home.scss";
-import { Header } from "../layouts/Header";
-import { Footer } from "../layouts/Footer";
+import '../styles/pages/Home.scss'
+import { Header } from '../layouts/Header'
+import { Footer } from '../layouts/Footer'
 
-import productImg from "/public/product.webp";
-import shoppingIcon from "/public/shopping-icon.webp";
-import arrowLeftImg from "/public/arrow-left.webp";
-import arrowRightImg from "/public/arrow-right.webp";
-import favoriteIcon from "/public/favorite-icon.webp";
+import productImg from '/public/product.webp'
+import shoppingIcon from '/public/shopping-icon.webp'
+import arrowLeftImg from '/public/arrow-left.webp'
+import arrowRightImg from '/public/arrow-right.webp'
+import favoriteIcon from '/public/favorite-icon.webp'
 
 export function Home() {
-  const products = Array.from({ length: 7 }, (_, i) => i);
+  const products = Array.from({ length: 7 }, (_, i) => i)
 
-  const ulRefs = useRef<HTMLUListElement[]>([]);
-  const moveScrollValue = 500;
+  const ulRefs = useRef<HTMLUListElement[]>([])
+  const moveScrollValue = 500
 
   const moveScroll = (ul: number, value: number) => {
     ulRefs.current[ul].scrollBy({
       left: value,
-      behavior: "smooth",
-    });
-  };
+      behavior: 'smooth',
+    })
+  }
 
   const addUlRef = (index: number) => (element: HTMLUListElement) => {
-    ulRefs.current[index] = element;
-  };
+    ulRefs.current[index] = element
+  }
 
   return (
     <>
@@ -67,7 +67,7 @@ export function Home() {
           </div>
           <ul ref={addUlRef(0)}>
             {products.map((i) => (
-              <li key={i} style={{ "--i": i } as React.CSSProperties}>
+              <li key={i} style={{ '--i': i } as React.CSSProperties}>
                 <button className="favorite">
                   <img src={favoriteIcon} alt="Favorite icon" />
                 </button>
@@ -170,5 +170,5 @@ export function Home() {
       </main>
       <Footer />
     </>
-  );
+  )
 }
