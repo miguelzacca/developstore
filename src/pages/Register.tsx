@@ -2,7 +2,7 @@ import { useRef, FormEvent, useState } from 'react'
 import '../styles/pages/Auth.scss'
 
 import { AnimeButton } from '../components/AnimeButton'
-import utils from '../utils'
+import { utils } from '../utils'
 
 const { VITE_API_HOST } = import.meta.env
 

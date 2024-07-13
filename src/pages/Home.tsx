@@ -3,16 +3,14 @@ import { useRef } from 'react'
 import '../styles/pages/Home.scss'
 import { Header } from '../layouts/Header'
 import { Footer } from '../layouts/Footer'
+import { ProductsUL } from '../components/ProductsUL'
 
 import productImg from '/public/product.webp'
 import shoppingIcon from '/public/shopping-icon.webp'
 import arrowLeftImg from '/public/arrow-left.webp'
 import arrowRightImg from '/public/arrow-right.webp'
-import favoriteIcon from '/public/favorite-icon.webp'
 
 export function Home() {
-  const products = Array.from({ length: 7 }, (_, i) => i)
-
   const ulRefs = useRef<HTMLUListElement[]>([])
   const moveScrollValue = 500
 
@@ -66,25 +64,7 @@ export function Home() {
             </div>
           </div>
           <ul ref={addUlRef(0)}>
-            {products.map((i) => (
-              <li key={i} style={{ '--i': i } as React.CSSProperties}>
-                <button className="favorite">
-                  <img src={favoriteIcon} alt="Favorite icon" />
-                </button>
-                <picture>
-                  <img src={productImg} alt="Product image" />
-                </picture>
-                <div className="info-container">
-                  <h3>Product Name</h3>
-                  <p>Small information</p>
-                  <div className="price-container">
-                    <del>R$ 4,99</del>
-                    <p id="price">R$ 1,99</p>
-                  </div>
-                </div>
-                <button id="buy">+</button>
-              </li>
-            ))}
+            <ProductsUL category="Recommended" animation={true} />
           </ul>
         </section>
         <section id="popular-products">
@@ -106,25 +86,7 @@ export function Home() {
             </div>
           </div>
           <ul ref={addUlRef(1)}>
-            {products.map((i) => (
-              <li key={i}>
-                <button className="favorite">
-                  <img src={favoriteIcon} alt="Favorite icon" />
-                </button>
-                <picture>
-                  <img src={productImg} alt="Product image" />
-                </picture>
-                <div className="info-container">
-                  <h3>Product Name</h3>
-                  <p>Small information</p>
-                  <div className="price-container">
-                    <del>R$ 4,99</del>
-                    <p id="price">R$ 1,99</p>
-                  </div>
-                </div>
-                <button id="buy">+</button>
-              </li>
-            ))}
+            <ProductsUL category="Popular 2024" />
           </ul>
         </section>
         <section id="best-products">
@@ -146,25 +108,7 @@ export function Home() {
             </div>
           </div>
           <ul ref={addUlRef(2)}>
-            {products.map((i) => (
-              <li key={i}>
-                <button className="favorite">
-                  <img src={favoriteIcon} alt="Favorite icon" />
-                </button>
-                <picture>
-                  <img src={productImg} alt="Product image" />
-                </picture>
-                <div className="info-container">
-                  <h3>Product Name</h3>
-                  <p>Small information</p>
-                  <div className="price-container">
-                    <del>R$ 4,99</del>
-                    <p id="price">R$ 1,99</p>
-                  </div>
-                </div>
-                <button id="buy">+</button>
-              </li>
-            ))}
+            <ProductsUL category="The best" />
           </ul>
         </section>
       </main>

@@ -1,4 +1,7 @@
-import { RefObject } from "react"
+import { RefObject } from 'react'
+import { ProductEl } from './types/global'
+
+const { VITE_API_HOST } = import.meta.env
 
 interface IObjKey {
   [key: string]: string
@@ -8,11 +11,16 @@ interface IObjFromFormData {
   [key: string]: FormDataEntryValue
 }
 
+type GetProductsFn = (
+  category: string,
+  fn: React.Dispatch<React.SetStateAction<ProductEl[]>>
+) => void
+
 class Utils {
   private _animeMsg = async (display: Element) => {
-    display.classList.toggle("msg-anime")
+    display.classList.toggle('msg-anime')
     await this.wait(5000)
-    display.classList.toggle("msg-anime")
+    display.classList.toggle('msg-anime')
   }
 
   public wait = (ms: number) => {
@@ -32,11 +40,20 @@ class Utils {
   public handleMsg = (data: IObjKey, msgRef: RefObject<HTMLDivElement>) => {
     const display = msgRef.current
     if (!display) {
-      throw new Error("Missing msgRef prop.")
+      throw new Error('Missing msgRef prop.')
     }
     display.textContent = data.msg || data.zod
     this._animeMsg(display)
   }
+
+  public getProducts: GetProductsFn = (category, fn) => {
+    fetch(`${VITE_API_HOST}/products?category=${category}`).then(
+      async (res) => {
+        const data = await res.json()
+        fn(data)
+      }
+    )
+  }
 }
 
-export default new Utils()
+export const utils = new Utils()
