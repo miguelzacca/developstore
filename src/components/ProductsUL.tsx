@@ -1,24 +1,16 @@
-import { useEffect, useState } from 'react'
-import { utils } from '../utils'
 import { ProductEl } from '../types/global'
 
 import favoriteIcon from '/public/favorite-icon.webp'
 
 interface ProductsULProps {
-  category: string
+  products: ProductEl[]
   animation?: boolean
 }
 
-export function ProductsUL({ category, animation }: ProductsULProps) {
-  const [productList, setProductList] = useState<ProductEl[]>([])
-
-  useEffect(() => {
-    utils.getProducts(category, setProductList)
-  }, [category])
-
+export function ProductsUL({ products, animation }: ProductsULProps) {
   return (
     <>
-      {productList.map((el: ProductEl, i) => (
+      {products.map((el: ProductEl, i) => (
         <li
           key={el.id}
           style={animation ? ({ '--i': i } as React.CSSProperties) : undefined}

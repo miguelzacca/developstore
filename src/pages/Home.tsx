@@ -1,11 +1,12 @@
-import { useRef } from 'react'
+import { useRef, useEffect, useState } from 'react'
+import { utils } from '../utils'
+import { ProductEl } from '../types/global'
 
 import '../styles/pages/Home.scss'
 import { Header } from '../layouts/Header'
 import { Footer } from '../layouts/Footer'
 import { ProductsUL } from '../components/ProductsUL'
 
-import productImg from '/public/product.webp'
 import shoppingIcon from '/public/shopping-icon.webp'
 import arrowLeftImg from '/public/arrow-left.webp'
 import arrowRightImg from '/public/arrow-right.webp'
@@ -25,6 +26,22 @@ export function Home() {
     ulRefs.current[index] = element
   }
 
+  const [products, setProducts] = useState<ProductEl[]>([])
+
+  useEffect(() => {
+    utils.getProducts('', setProducts)
+  }, [])
+
+  const recommendedProducts = products.filter(
+    (el) => el.category === 'Recommended'
+  )
+
+  const popular2024Products = products.filter(
+    (el) => el.category === 'Popular 2024'
+  )
+
+  const theBestProducts = products.filter((el) => el.category === 'The best')
+
   return (
     <>
       <Header path="home" />
@@ -42,7 +59,9 @@ export function Home() {
             </button>
           </div>
           <picture>
-            <img src={productImg} alt="Sale product image" />
+            {products[0] ? (
+              <img src={products[0].img} alt="Sale product image" />
+            ) : null}
           </picture>
         </div>
         <section id="recommended-products">
@@ -63,8 +82,8 @@ export function Home() {
               </button>
             </div>
           </div>
-          <ul ref={addUlRef(0)}>
-            <ProductsUL category="Recommended" animation={true} />
+          <ul ref={addUlRef(0)} className={products[0] ? undefined : 'loading'}>
+            <ProductsUL products={recommendedProducts} animation={true} />
           </ul>
         </section>
         <section id="popular-products">
@@ -85,8 +104,8 @@ export function Home() {
               </button>
             </div>
           </div>
-          <ul ref={addUlRef(1)}>
-            <ProductsUL category="Popular 2024" />
+          <ul ref={addUlRef(1)} className={products[0] ? undefined : 'loading'}>
+            <ProductsUL products={popular2024Products} />
           </ul>
         </section>
         <section id="best-products">
@@ -107,8 +126,8 @@ export function Home() {
               </button>
             </div>
           </div>
-          <ul ref={addUlRef(2)}>
-            <ProductsUL category="The best" />
+          <ul ref={addUlRef(2)} className={products[0] ? undefined : 'loading'}>
+            <ProductsUL products={theBestProducts} />
           </ul>
         </section>
       </main>
