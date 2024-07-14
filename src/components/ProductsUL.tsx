@@ -29,7 +29,7 @@ export function ProductsUL({ products, animation }: ProductsULProps) {
               <p id="price">R$ {el.price}</p>
             </div>
           </div>
-          <button id="buy">+</button>
+          <button className="buy">+</button>
         </li>
       ))}
     </>

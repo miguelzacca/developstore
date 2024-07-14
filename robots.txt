@@ -1,0 +1,6 @@
+User-agent: *
+
+Disallow: /passwd-change
+Allow: /
+
+Sitemap: http://localhost/sitemap.xml

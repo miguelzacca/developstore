@@ -3,16 +3,35 @@
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="Content-Security-Policy" content="script-src 'self';" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" href="public/window-logo.webp" type="image/webp" />
-    <title>Develop Store | The best E-Commerce</title>
+
+    <!-- PWA -->
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <meta name="theme-color" content="#000000" />
+
+    <!-- SEO -->
+    <meta
+      name="description"
+      content="Develop Store is the best E-Commerce platform offering a wide range of products."
+    />
+    <meta
+      name="keywords"
+      content="e-commerce, online store, buy online, Develop Store"
+    />
+    <meta name="author" content="Miguel Zacca" />
+
+    <!-- ICON -->
+    <link rel="icon" href="public/window-logo.png" type="image/png" />
+
+    <!-- FONT -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap"
       rel="stylesheet"
     />
+
+    <title>Develop Store | The best E-Commerce</title>
   </head>
   <body>
     <div id="root"></div>
@@ -24,7 +43,7 @@
           width: calc(100vw - 30px);
           text-align: center;
           position: absolute;
-          font-family: "Poppins";
+          font-family: 'Poppins';
           inset: 50%;
           transform: translate(-50%, -50%);
         }
