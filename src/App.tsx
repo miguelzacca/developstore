@@ -7,6 +7,7 @@ import { Login } from "./pages/Login.tsx"
 import { Register } from "./pages/Register.tsx"
 import { PasswdRecovery } from "./pages/PasswdRecovery.tsx"
 import { PasswdChange } from "./pages/PasswdChange.tsx"
+import { Search } from "./pages/Search.tsx"
 
 export function App() {
   return (
@@ -17,6 +18,7 @@ export function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/passwd-recovery" element={<PasswdRecovery />} />
+        <Route path="/search" element={<Search />} />
         <Route
           path="/passwd-change/:token"
           element={

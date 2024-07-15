@@ -11,10 +11,7 @@ interface IObjFromFormData {
   [key: string]: FormDataEntryValue
 }
 
-type GetProductsFn = (
-  category: string,
-  fn: React.Dispatch<React.SetStateAction<ProductEl[]>>
-) => void
+type GetProductsFn = (category: string) => Promise<ProductEl[]>
 
 class Utils {
   private _animeMsg = async (display: Element) => {
@@ -46,11 +43,10 @@ class Utils {
     this._animeMsg(display)
   }
 
-  public getProducts: GetProductsFn = (category, fn) => {
-    fetch(`${VITE_API_HOST}/products?category=${category}`).then(
+  public getProducts: GetProductsFn = async (category) => {
+    return await fetch(`${VITE_API_HOST}/products?category=${category}`).then(
       async (res) => {
-        const data = await res.json()
-        fn(data)
+        return await res.json()
       }
     )
   }

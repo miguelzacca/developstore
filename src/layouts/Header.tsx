@@ -6,18 +6,19 @@ import accountIcon from '/public/account-icon.webp'
 import favoriteIcon from '/public/favorite-icon.webp'
 import shoppingIcon from '/public/shopping-icon.webp'
 
-interface props {
+interface HeaderProps {
   path: string
+  searchInputRef?: React.MutableRefObject<HTMLInputElement>
 }
 
-export function Header({ path }: props) {
+export function Header({ path, searchInputRef }: HeaderProps) {
   return (
     <header>
       <div className="high-container">
         <a href="/" className="refresh-link">
           <img src={logoImg} className="logo" alt="Logo" />
         </a>
-        <SearchInput id="search-input-header" />
+        <SearchInput id="search-input-header" searchInputRef={searchInputRef} />
         <nav>
           <a href="./account" className="account-link">
             <img src={accountIcon} alt="Account icon" />
@@ -35,9 +36,10 @@ export function Header({ path }: props) {
         <details>
           <summary>Categories</summary>
           <div>
-            <a href="/#recommended-products">Recommended</a>
-            <a href="/#popular-products">Popular 2024</a>
-            <a href="/#best-products">The best</a>
+            <a href="/search?set=Recommended">Recommended</a>
+            <a href="/search?set=Popular 2024">Popular 2024</a>
+            <a href="/search?set=The best">The best</a>
+            <a href="/search">All</a>
           </div>
         </details>
         <div className="path">{`> ${path}`}</div>

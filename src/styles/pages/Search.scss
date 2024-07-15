@@ -1,0 +1,25 @@
+main#Search {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  ul {
+    margin: 5rem 0;
+    justify-content: center;
+    flex-wrap: wrap;
+    mask-image: none !important;
+    padding: 0 !important;
+
+    li {
+      flex: 1;
+      max-width: 21.5rem;
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  ul {
+    transform: none !important;
+    width: 100vw;
+  }
+}

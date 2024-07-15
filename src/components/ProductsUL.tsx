@@ -1,6 +1,7 @@
 import { ProductEl } from '../types/global'
 
 import favoriteIcon from '/public/favorite-icon.webp'
+import "../styles/components/ProductsUL.scss"
 
 interface ProductsULProps {
   products: ProductEl[]
@@ -16,10 +17,10 @@ export function ProductsUL({ products, animation }: ProductsULProps) {
           style={animation ? ({ '--i': i } as React.CSSProperties) : undefined}
         >
           <button className="favorite">
-            <img src={favoriteIcon} alt="Favorite icon" />
+            <img src={favoriteIcon} alt="Favorite icon" loading='lazy' />
           </button>
           <picture>
-            <img src={el.img} alt="Product image" />
+            <img src={el.img} alt="Product image" loading='lazy' />
           </picture>
           <div className="info-container">
             <h3>{el.productName}</h3>

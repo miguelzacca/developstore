@@ -19,19 +19,19 @@ export function Footer() {
     <footer>
       <div className="benefits-container">
         <div className="container">
-          <img src={deliveryImg} alt="Delivery icon" />
+          <img src={deliveryImg} alt="Delivery icon"  loading='lazy' />
           INSTANT DELIVERY
         </div>
         <div className="container">
-          <img src={payReturnImg} alt="Refund icon" />
+          <img src={payReturnImg} alt="Refund icon"  loading='lazy' />
           NOT REFUND
         </div>
         <div className="container">
-          <img src={securePayImg} alt="Secure payment icon" />
+          <img src={securePayImg} alt="Secure payment icon"  loading='lazy' />
           SECURE PAYMENT
         </div>
         <div className="container">
-          <img src={supportImg} alt="Support icon" />
+          <img src={supportImg} alt="Support icon"  loading='lazy' />
           24/7 SUPPORT
         </div>
       </div>
@@ -42,7 +42,7 @@ export function Footer() {
       <div className="main-container">
         <div className="site-profile">
           <a href="/">
-            <img src={logoImg} alt="Logo" />
+            <img src={logoImg} alt="Logo" loading='lazy' />
           </a>
           <p className="describe">
             The best <br />
@@ -50,22 +50,22 @@ export function Footer() {
           </p>
         </div>
         <div className="payment-methods">
-          <img src={visaPaymentImg} alt="Visa icon" />
-          <img src={mastercardPaymentImg} alt="Mastercard icon" />
-          <img src={pixPaymentImg} alt="Pix icon" />
-          <img src={stripePaymentImg} alt="Stripe icon" />
+          <img src={visaPaymentImg} alt="Visa icon" loading='lazy' />
+          <img src={mastercardPaymentImg} alt="Mastercard icon" loading='lazy' />
+          <img src={pixPaymentImg} alt="Pix icon" loading='lazy' />
+          <img src={stripePaymentImg} alt="Stripe icon" loading='lazy' />
         </div>
         <div className="contact">
           <p className="number">+55 (48) 99664-7429</p>
           <div className="links">
             <a href="./support.html">
-              <img src={emailImg} alt="Email icon" />
+              <img src={emailImg} alt="Email icon" loading='lazy' />
             </a>
             <a href="https://www.linkedin.com/in/miguelzacca" target="_blank">
-              <img src={linkedinImg} alt="Linkedin icon" />
+              <img src={linkedinImg} alt="Linkedin icon" loading='lazy' />
             </a>
             <a href="https://github.com/miguelzacca" target="_blank">
-              <img src={githubImg} alt="Github icon" />
+              <img src={githubImg} alt="Github icon" loading='lazy' />
             </a>
           </div>
         </div>

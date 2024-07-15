@@ -29,7 +29,19 @@ export function Home() {
   const [products, setProducts] = useState<ProductEl[]>([])
 
   useEffect(() => {
-    utils.getProducts('', setProducts)
+    const fetchProducts = async () => {
+      const storedProducts = localStorage.getItem('storedProducts')
+
+      if (storedProducts) {
+        return setProducts(JSON.parse(storedProducts))
+      }
+
+      const fetchedProducts = await utils.getProducts('')
+      setProducts(fetchedProducts)
+      localStorage.setItem('storedProducts', JSON.stringify(fetchedProducts))
+    }
+
+    fetchProducts()
   }, [])
 
   const recommendedProducts = products.filter(

@@ -8,7 +8,7 @@ main#Auth {
 
   &::before,
   &::after {
-    content: "";
+    content: '';
     display: block;
     position: absolute;
     opacity: 0.5;
@@ -175,18 +175,30 @@ main#Auth {
   right: 3rem;
   z-index: 99;
   padding: 1rem 2rem;
-  background-color: #5f5;
   border: 0.2rem solid transparent;
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   transition: all 0.25s;
-  color: #fff;
-  font-size: 1.6rem;
+  color: #444;
+  letter-spacing: 0.1rem;
+  font-size: 1.7rem;
+  font-weight: 500;
   border-radius: 1rem;
 
+  &::before {
+    position: absolute;
+    content: '';
+    left: 50%;
+    width: 0;
+    bottom: 0;
+    transform: translateX(-50%);
+    height: 0.25rem;
+    background-color: #444;
+    transition: width 0.2s ease-out;
+  }
+
   &:hover {
-    border-color: #5f5;
-    background-color: #fff;
-    color: #5f5;
+    &::before {
+      width: 100%;
+    }
   }
 }
 

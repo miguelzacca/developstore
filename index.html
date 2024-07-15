@@ -2,14 +2,22 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta http-equiv="Content-Security-Policy" content="script-src 'self';" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+    <!-- SECURITY -->
+    <meta http-equiv="Content-Security-Policy" content="script-src 'self';" />
+
     <!-- PWA -->
-    <link rel="manifest" href="/manifest.webmanifest" />
     <meta name="theme-color" content="#000000" />
+    <link
+      rel="manifest"
+      href="/manifest.webmanifest"
+      crossorigin="use-credentials"
+    />
 
     <!-- SEO -->
+    <meta name="author" content="Miguel Zacca" />
+    <link rel="canonical" href="https://developstore.up.railway.app" />
     <meta
       name="description"
       content="Develop Store is the best E-Commerce platform offering a wide range of products."
@@ -18,10 +26,9 @@
       name="keywords"
       content="e-commerce, online store, buy online, Develop Store"
     />
-    <meta name="author" content="Miguel Zacca" />
 
     <!-- ICON -->
-    <link rel="icon" href="public/window-logo.png" type="image/png" />
+    <link rel="icon" href="/public/window-logo.png" type="image/png" />
 
     <!-- FONT -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -36,6 +43,7 @@
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
+
     <noscript>
       <style>
         h3 {
