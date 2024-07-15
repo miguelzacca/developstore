@@ -36,7 +36,7 @@ export function Home() {
         return setProducts(JSON.parse(storedProducts))
       }
 
-      const fetchedProducts = await utils.getProducts('')
+      const fetchedProducts = await utils.getAllProducts()
       setProducts(fetchedProducts)
       localStorage.setItem('storedProducts', JSON.stringify(fetchedProducts))
     }

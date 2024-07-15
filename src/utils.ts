@@ -11,10 +11,10 @@ interface IObjFromFormData {
   [key: string]: FormDataEntryValue
 }
 
-type GetProductsFn = (category: string) => Promise<ProductEl[]>
+type GetAllProducts = () => Promise<ProductEl[]>
 
 class Utils {
-  private _animeMsg = async (display: Element) => {
+  private animeMsg = async (display: Element) => {
     display.classList.toggle('msg-anime')
     await this.wait(5000)
     display.classList.toggle('msg-anime')
@@ -40,15 +40,11 @@ class Utils {
       throw new Error('Missing msgRef prop.')
     }
     display.textContent = data.msg || data.zod
-    this._animeMsg(display)
+    this.animeMsg(display)
   }
 
-  public getProducts: GetProductsFn = async (category) => {
-    return await fetch(`${VITE_API_HOST}/products?category=${category}`).then(
-      async (res) => {
-        return await res.json()
-      }
-    )
+  public getAllProducts: GetAllProducts = async () => {
+    return await fetch(`${VITE_API_HOST}/products`).then((res) => res.json())
   }
 }
 
