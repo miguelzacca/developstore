@@ -12,7 +12,9 @@ export function SearchInput({ id, searchInputRef }: SearchInputProps) {
   const redirectRef = useRef<HTMLInputElement>(document.createElement('input'))
 
   const redirect = () => {
-    location.replace(`/search?set=${redirectRef.current.value}`)
+    if (location.pathname !== '/search') {
+      location.replace(`/search?set=${redirectRef.current.value}`)
+    }
   }
 
   redirectRef.current.addEventListener('change', redirect)

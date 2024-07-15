@@ -15,11 +15,23 @@ main#Search {
       max-width: 21.5rem;
     }
   }
-}
 
-@media screen and (max-width: 768px) {
-  ul {
-    transform: none !important;
-    width: 100vw;
+  @media screen and (max-width: 768px) {
+    ul {
+      transform: none !important;
+      width: 100vw;
+    }
+  }
+
+  @media screen and (max-width: 400px) {
+    ul {
+      display: grid;
+      grid-template-columns: auto auto;
+      gap: 0.5rem !important;
+
+      li {
+        width: 17rem;
+      }
+    }
   }
 }
