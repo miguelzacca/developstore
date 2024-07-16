@@ -13,7 +13,11 @@ export function SearchInput({ id, searchInputRef }: SearchInputProps) {
 
   const redirect = () => {
     if (location.pathname !== '/search') {
-      location.replace(`/search?set=${redirectRef.current.value}`)
+      location.replace(
+        `/search${
+          redirectRef.current.value && `?set=${redirectRef.current.value}`
+        }`
+      )
     }
   }
 
@@ -31,7 +35,7 @@ export function SearchInput({ id, searchInputRef }: SearchInputProps) {
         />
         <label htmlFor={id}>Search product</label>
       </div>
-      <button id="search-button" onClick={() => redirect()}>
+      <button id={`${id}-button`} onClick={() => redirect()}>
         <img src={searchIcon} alt="Search icon" />
       </button>
     </div>

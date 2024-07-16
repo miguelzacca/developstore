@@ -115,7 +115,7 @@ export function Auth({ process }: AuthProps) {
 
         {process === 'register' ? (
           <div className="input-container">
-            <input type="text" name="name" id="name" placeholder=" " required />
+            <input type="text" name="uname" id="name" placeholder=" " required />
             <label htmlFor="name">Username</label>
           </div>
         ) : null}

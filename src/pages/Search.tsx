@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
+import { utils } from '../utils'
 
 import { Header } from '../layouts/Header'
 import { ProductEl } from '../types/global'
@@ -14,17 +15,12 @@ export function Search() {
     document.createElement('input')
   )
 
-  const getURLSearch = (query: string) => {
-    return location.search
-      ?.split(`${query}=`)[1]
-      ?.split('&')[0]
-      .replace('%20', ' ')
-  }
-
-  const setSearch = getURLSearch('set')
+  const setSearch = utils.getURLSearchParam('set')
 
   useEffect(() => {
-    searchInputRef.current.focus()
+    setSearch
+      ? (searchInputRef.current.value = setSearch)
+      : searchInputRef.current.focus()
 
     const handleChange = (event: Event) => {
       const { value } = event.target as HTMLInputElement
@@ -37,7 +33,7 @@ export function Search() {
 
       return () => inputElement.removeEventListener('change', handleChange)
     }
-  }, [])
+  }, [setSearch])
 
   const storedProducts = JSON.parse(localStorage.getItem('storedProducts')!)
   const valid = (str: string) => str.trim().toLowerCase()

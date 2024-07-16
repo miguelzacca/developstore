@@ -46,6 +46,13 @@ class Utils {
   public getAllProducts: GetAllProducts = async () => {
     return await fetch(`${VITE_API_HOST}/products`).then((res) => res.json())
   }
+
+  public getURLSearchParam = (query: string) => {
+    return location.search
+      ?.split(`${query}=`)[1]
+      ?.split('&')[0]
+      .replace('%20', ' ')
+  }
 }
 
 export const utils = new Utils()
