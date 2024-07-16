@@ -6,33 +6,6 @@ main#Auth {
   align-items: center;
   margin: 0;
 
-  &::before,
-  &::after {
-    content: '';
-    display: block;
-    position: absolute;
-    opacity: 0.5;
-    filter: blur(10rem);
-    width: 30rem;
-    aspect-ratio: 1;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    left: 50%;
-    opacity: 0;
-    border-radius: 50%;
-    z-index: -1;
-  }
-
-  &::before {
-    background-color: #ffba24;
-    animation: main-before 1s forwards;
-  }
-
-  &::after {
-    background-color: #ff4343;
-    animation: main-after 1s forwards;
-  }
-
   form {
     display: flex;
     background-color: #fff;
@@ -42,8 +15,27 @@ main#Auth {
     gap: 2rem;
     overflow: hidden;
     border-radius: 0.5rem;
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    box-shadow: rgba(136, 118, 118, 0.24) 0px 3px 8px;
     padding: 2rem;
+
+    .to-home-link {
+      filter: invert(1);
+      opacity: 0.4;
+      position: absolute;
+      left: 1rem;
+      padding: 0.5rem;
+      z-index: 4;
+      top: 1rem;
+      transition: opacity 0.15s;
+
+      img {
+        width: 2rem;
+      }
+
+      &:hover {
+        opacity: 0.9;
+      }
+    }
 
     h2 {
       font-size: 3rem;
@@ -79,7 +71,7 @@ main#Auth {
 
       input {
         width: 30rem;
-        padding: 0.75rem 1rem;
+        padding: 1rem 1rem;
         color: var(--black);
         border: 0.1rem solid #00000075;
         border-radius: 0.2rem;
@@ -123,20 +115,6 @@ main#Auth {
         }
       }
     }
-  }
-}
-
-@keyframes main-before {
-  to {
-    transform: translate(-100%, -100%);
-    opacity: 0.7;
-  }
-}
-
-@keyframes main-after {
-  to {
-    transform: translate(0%, 0%);
-    opacity: 0.7;
   }
 }
 
@@ -209,17 +187,5 @@ main#Auth {
     input {
       width: 100% !important;
     }
-  }
-
-  #handleAuthPage {
-    left: 1.5rem;
-    width: min-content;
-    top: 1.5rem;
-    height: min-content;
-  }
-
-  #msg {
-    max-width: 75%;
-    padding: 1.5rem;
   }
 }

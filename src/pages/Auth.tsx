@@ -1,6 +1,7 @@
 import { FormEvent, useRef, useState } from 'react'
 import { utils } from '../utils'
 
+import toHomeIcon from '/public/to-home-icon.webp'
 import { AnimeButton } from '../components/AnimeButton'
 import '../styles/pages/Auth.scss'
 
@@ -107,6 +108,9 @@ export function Auth({ process }: AuthProps) {
       <div ref={msgRef} id="msg"></div>
       <form ref={form} onSubmit={handleFormSubmit}>
         <div className="header"></div>
+        <a className="to-home-link" href="/">
+          <img src={toHomeIcon} alt="Home link" />
+        </a>
         <h2>{process}</h2>
 
         {process === 'register' ? (
