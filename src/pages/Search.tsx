@@ -42,7 +42,9 @@ export function Search() {
 
   const filtereProducts = filter
     ? storedProducts.filter((el: ProductEl) =>
-        valid(`${el.productName}${el.category}`).includes(valid(filter))
+        valid(`${el.productName}${el.category}${el.info}`).includes(
+          valid(filter)
+        )
       )
     : storedProducts
 
