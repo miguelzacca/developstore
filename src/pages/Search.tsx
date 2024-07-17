@@ -53,7 +53,7 @@ export function Search() {
       <Header path="search" searchInputRef={searchInputRef} />
       <main id="Search">
         <ul>
-          <ProductsUL products={filtereProducts} />
+          <ProductsUL products={filtereProducts} nullMessage="<Empty>" />
         </ul>
       </main>
       <Footer />

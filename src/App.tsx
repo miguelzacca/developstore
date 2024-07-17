@@ -6,6 +6,7 @@ import { Account } from './pages/Account.tsx'
 import { Auth } from './pages/Auth.tsx'
 import { PasswdChange } from './pages/PasswdChange.tsx'
 import { Search } from './pages/Search.tsx'
+import { Favorites } from './pages/Favorites.tsx'
 
 export function App() {
   return (
@@ -16,6 +17,7 @@ export function App() {
         <Route path="/login" element={<Auth process="login" />} />
         <Route path="/register" element={<Auth process="register" />} />
         <Route path="/search" element={<Search />} />
+        <Route path="/favorites" element={<Favorites />} />
         <Route
           path="/passwd-recovery"
           element={<Auth process="passwd-recovery" />}

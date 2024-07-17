@@ -61,6 +61,10 @@ class Utils {
     const relativeTime = 24 * 60 * 60 * 1000
     return currentTime - lastFetch >= relativeTime
   }
+
+  public isFavorite = (id: number) => {
+    return localStorage.getItem('favorites')?.includes(String(id))
+  }
 }
 
 export const utils = new Utils()

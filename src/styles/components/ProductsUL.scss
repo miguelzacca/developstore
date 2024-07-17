@@ -85,8 +85,18 @@ ul {
         box-shadow: 0 0 0.5rem #00000075;
       }
 
-      img {
+      .favorite-icon {
         width: 1.5rem;
+        aspect-ratio: 1;
+        background-image: url('/public/favorite-icon.webp');
+        background-size: cover;
+        background-repeat: no-repeat;
+      }
+
+      &.checked {
+        .favorite-icon {
+          background-image: url('/public/favorited-icon.webp');
+        }
       }
     }
 

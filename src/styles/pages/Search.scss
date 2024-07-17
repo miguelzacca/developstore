@@ -1,4 +1,5 @@
-main#Search {
+main#Search,
+main#Favorites {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -9,6 +10,12 @@ main#Search {
     flex-wrap: wrap;
     mask-image: none !important;
     padding: 0 !important;
+
+    .ifNull {
+      font-weight: 400;
+      font-size: 1.7rem;
+      color: var(--black);
+    }
 
     li {
       flex: 1;
