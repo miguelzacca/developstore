@@ -1,25 +1,26 @@
-import { useRef } from 'react'
+import { useRef, useState } from 'react'
 import '../styles/pages/Account.scss'
 
 export function Account() {
   const mainTag = useRef<HTMLElement>(null)
+  const [user, setUser] = useState()
 
   fetch(`${import.meta.env['VITE_API_HOST']}/user`, {
     credentials: 'include',
   })
-    .then((res) => {
+    .then(async (res) => {
       if (!res.ok) {
         return (location.href = '/login')
       }
 
-      if (mainTag.current) {
-        mainTag.current.textContent = 'SUCCESS'
-      }
+      setUser(await res.json())
     })
-    .catch((err) => {
-      console.error(err)
-      location.href = '/login'
-    })
+    .catch(() => (location.href = '/login'))
 
-  return <main id="Account" ref={mainTag}></main>
+  return (
+    <main id="Account" ref={mainTag}>
+      <h2>{user && user['uname']}</h2>
+      <h3>{user && user['email']}</h3>
+    </main>
+  )
 }

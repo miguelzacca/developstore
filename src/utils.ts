@@ -44,6 +44,7 @@ class Utils {
   }
 
   public getAllProducts: GetAllProducts = async () => {
+    localStorage.setItem('lastFetch', new Date().getTime().toString())
     return await fetch(`${VITE_API_HOST}/products`).then((res) => res.json())
   }
 
@@ -52,6 +53,13 @@ class Utils {
       ?.split(`${query}=`)[1]
       ?.split('&')[0]
       .replace('%20', ' ')
+  }
+
+  public has24hPassed = () => {
+    const lastFetch = Number(localStorage.getItem('lastFetch'))
+    const currentTime = new Date().getTime()
+    const relativeTime = 24 * 60 * 60 * 1000
+    return currentTime - lastFetch >= relativeTime
   }
 }
 

@@ -3,5 +3,21 @@ main#Account {
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  font-size: 2rem;
+  display: grid;
+  place-items: center;
+  gap: 1rem;
+
+  h2,
+  h3 {
+    font-weight: 400;
+    color: var(--black);
+  }
+
+  h2 {
+    font-size: 2rem;
+  }
+
+  h3 {
+    font-size: 1.2rem;
+  }
 }

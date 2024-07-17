@@ -8,7 +8,7 @@
   "description": "The best E-Commerce",
   "icons": [
     {
-      "src": "/assets/window-logo-rXg0qP8a.png",
+      "src": "/app-logo.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"

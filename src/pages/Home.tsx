@@ -31,8 +31,9 @@ export function Home() {
   useEffect(() => {
     const fetchProducts = async () => {
       const storedProducts = localStorage.getItem('storedProducts')
+      const newFetch = utils.has24hPassed()
 
-      if (storedProducts) {
+      if (storedProducts && !newFetch) {
         return setProducts(JSON.parse(storedProducts))
       }
 
