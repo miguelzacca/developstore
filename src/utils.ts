@@ -62,8 +62,10 @@ class Utils {
     return currentTime - lastFetch >= relativeTime
   }
 
-  public isFavorite = (id: number) => {
-    return localStorage.getItem('favorites')?.includes(String(id))
+  public isFavorite = (id: number): boolean => {
+    const storedFavorites = localStorage.getItem('favorites')
+    const parsedFavorites = storedFavorites ? JSON.parse(storedFavorites) : []
+    return parsedFavorites.includes(id)
   }
 }
 

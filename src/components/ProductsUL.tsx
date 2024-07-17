@@ -24,16 +24,22 @@ export function ProductsUL({
   const favorite = (index: number, productId: number) => {
     favoriteBtnRef.current[index].classList.toggle('checked')
 
-    const storedFavorites = localStorage.getItem('favorites') || ''
+    const storedFavorites = localStorage.getItem('favorites')
+    const parsedStoredFavorites: number[] = storedFavorites
+      ? JSON.parse(storedFavorites)
+      : []
 
-    if (utils.isFavorite(productId)) {
+    if (parsedStoredFavorites.includes(productId)) {
       return localStorage.setItem(
         'favorites',
-        storedFavorites.split(`${String(productId)}`).join(' ')
+        JSON.stringify(parsedStoredFavorites.filter((id) => id !== productId))
       )
     }
 
-    localStorage.setItem('favorites', `${storedFavorites} ${productId}`)
+    localStorage.setItem(
+      'favorites',
+      JSON.stringify([...parsedStoredFavorites, productId])
+    )
   }
 
   return (
