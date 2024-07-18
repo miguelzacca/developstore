@@ -76,7 +76,7 @@ header {
 
     &::before {
       position: absolute;
-      content: "";
+      content: '';
       left: 50%;
       width: 0;
       bottom: 0;
@@ -102,6 +102,22 @@ header {
   .favorite-link img,
   .shopping-link img {
     width: 2rem;
+  }
+
+  .favorite-link.alert {
+    position: relative;
+
+    &::after {
+      content: '';
+      display: block;
+      width: 0.8rem;
+      height: 0.8rem;
+      background-color: #f33;
+      position: absolute;
+      top: 0.65rem;
+      right: 1.1rem;
+      border-radius: 50%;
+    }
   }
 }
 

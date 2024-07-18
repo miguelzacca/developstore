@@ -52,7 +52,8 @@ class Utils {
     return location.search
       ?.split(`${query}=`)[1]
       ?.split('&')[0]
-      .replace('%20', ' ')
+      ?.split('%20')
+      .join(' ')
   }
 
   public has24hPassed = () => {

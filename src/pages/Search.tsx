@@ -4,7 +4,6 @@ import { utils } from '../utils'
 import { Header } from '../layouts/Header'
 import { ProductEl } from '../types/global'
 import { ProductsUL } from '../components/ProductsUL'
-import { Footer } from '../layouts/Footer'
 
 import '../styles/pages/Search.scss'
 
@@ -56,7 +55,6 @@ export function Search() {
           <ProductsUL products={filtereProducts} nullMessage="<Empty>" />
         </ul>
       </main>
-      <Footer />
     </>
   )
 }

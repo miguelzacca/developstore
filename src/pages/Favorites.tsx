@@ -1,8 +1,8 @@
+import { utils } from '../utils'
+
 import { ProductsUL } from '../components/ProductsUL'
-import { Footer } from '../layouts/Footer'
 import { Header } from '../layouts/Header'
 import { ProductEl } from '../types/global'
-import { utils } from '../utils'
 
 import '../styles/pages/Search.scss'
 
@@ -21,7 +21,6 @@ export function Favorites() {
           <ProductsUL products={nodeFavorites} nullMessage="<Empty>" />
         </ul>
       </main>
-      <Footer />
     </>
   )
 }

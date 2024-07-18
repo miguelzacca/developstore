@@ -12,6 +12,8 @@ interface HeaderProps {
 }
 
 export function Header({ path, searchInputRef }: HeaderProps) {
+  const favorites = localStorage.getItem('favorites')
+
   return (
     <header>
       <div className="high-container">
@@ -24,7 +26,12 @@ export function Header({ path, searchInputRef }: HeaderProps) {
             <img src={accountIcon} alt="Account icon" />
             Account
           </a>
-          <a href="./favorites" className="favorite-link">
+          <a
+            href="./favorites"
+            className={`favorite-link ${
+              favorites && favorites.length > 2 ? 'alert' : ''
+            }`}
+          >
             <img src={favoriteIcon} alt="Favorite icon" />
           </a>
           <a href="./shopping" className="shopping-link">

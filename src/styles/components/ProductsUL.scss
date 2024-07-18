@@ -85,12 +85,30 @@ ul {
         box-shadow: 0 0 0.5rem #00000075;
       }
 
-      .favorite-icon {
+      .favorite-icon,
+      &::before {
         width: 1.5rem;
         aspect-ratio: 1;
         background-image: url('/public/favorite-icon.webp');
         background-size: cover;
         background-repeat: no-repeat;
+      }
+
+      &::before {
+        content: '';
+        display: none;
+        background-image: url('/public/favorited-icon.webp');
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+      }
+
+      &:active {
+        &::before {
+          display: block;
+          width: 1.8rem;
+        }
       }
 
       &.checked {
