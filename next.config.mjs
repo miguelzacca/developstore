@@ -4,7 +4,7 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'developstore.up.railway.app',
+        hostname: 'developstore-api.up.railway.app',
         pathname: '/public/*',
       },
     ],
