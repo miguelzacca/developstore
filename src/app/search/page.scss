@@ -1,0 +1,45 @@
+main#Search,
+main#Favorites {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  ul {
+    margin: 5rem 0;
+    justify-content: center;
+    flex-wrap: wrap;
+    mask-image: none !important;
+    padding: 0 !important;
+
+    .ifNull {
+      font-weight: 400;
+      font-size: 1.7rem;
+      color: var(--black);
+    }
+
+    li {
+      flex: 1;
+      max-width: 21.5rem;
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    ul {
+      transform: none !important;
+      margin-top: 10rem !important;
+      width: 100vw;
+    }
+  }
+
+  @media screen and (max-width: 400px) {
+    ul {
+      display: grid;
+      grid-template-columns: auto auto;
+      gap: 0.5rem !important;
+
+      li {
+        width: 17rem;
+      }
+    }
+  }
+}

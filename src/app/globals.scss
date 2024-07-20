@@ -1,0 +1,74 @@
+:root {
+  --black: #222;
+  --gray: #666;
+  --light-gray: #dfdfdf;
+  --page-padding: 5rem;
+}
+
+::-webkit-scrollbar {
+  background-color: transparent;
+  width: 0.5rem;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #000;
+}
+
+a,
+button,
+input,
+details {
+  outline: 0;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+a {
+  text-decoration: none;
+}
+
+button {
+  cursor: pointer;
+}
+
+html,
+nav {
+  display: flex;
+}
+
+html {
+  font-size: 10px;
+  justify-content: center;
+  overflow-x: hidden !important;
+  scroll-behavior: smooth;
+}
+
+body {
+  max-width: 1024px;
+  padding: 0 var(--page-padding);
+  width: 100vw;
+  height: max-content;
+}
+
+input {
+  font-size: 1.5rem;
+}
+
+nav {
+  gap: 1rem;
+}
+
+a,
+input {
+  color: var(--black);
+}
+
+@media screen and (max-width: 768px) {
+  body {
+    padding: 1.5rem;
+  }
+}

@@ -1,0 +1,48 @@
+import { useRef } from "react";
+import Image from "next/image";
+
+import "./SearchInput.scss";
+
+interface SearchInputProps {
+  id: string;
+  searchInputRef?: React.MutableRefObject<HTMLInputElement>;
+}
+
+export function SearchInput({ id, searchInputRef }: SearchInputProps) {
+  const redirectRef = useRef<HTMLInputElement>(document.createElement("input"));
+
+  const redirect = () => {
+    if (location.pathname !== "/search") {
+      location.replace(
+        `/search${
+          redirectRef.current.value && `?set=${redirectRef.current.value}`
+        }`,
+      );
+    }
+  };
+
+  redirectRef.current.addEventListener("change", redirect);
+
+  return (
+    <div className="search-container">
+      <div className="">
+        <input
+          type="search"
+          name="query"
+          id={id}
+          placeholder=" "
+          ref={searchInputRef ? searchInputRef : redirectRef}
+        />
+        <label htmlFor={id}>Search product</label>
+      </div>
+      <button id={`${id}-button`} onClick={() => redirect()}>
+        <Image
+          src="/images/search-icon.webp"
+          width={40}
+          height={17}
+          alt="Search icon"
+        />
+      </button>
+    </div>
+  );
+}

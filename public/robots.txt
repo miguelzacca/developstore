@@ -1,0 +1,6 @@
+User-Agent: *
+
+Disallow: /passwd-change
+Allow: /
+
+Sitemap: https://developstore.vercel.app/sitemap.xml

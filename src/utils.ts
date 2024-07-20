@@ -1,7 +1,7 @@
 import { RefObject } from 'react'
 import { ProductEl } from './types/global'
 
-const { VITE_API_HOST } = import.meta.env
+const API_ADDR = process.env.NEXT_PUBLIC_API_ADDR
 
 interface IObjKey {
   [key: string]: string
@@ -45,7 +45,7 @@ class Utils {
 
   public getAllProducts: GetAllProducts = async () => {
     localStorage.setItem('lastFetch', new Date().getTime().toString())
-    return await fetch(`${VITE_API_HOST}/products`).then((res) => res.json())
+    return await fetch(`${API_ADDR}/products`).then((res) => res.json())
   }
 
   public getURLSearchParam = (query: string) => {

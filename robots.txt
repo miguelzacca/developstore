@@ -1,6 +1,0 @@
-User-agent: *
-
-Disallow: /passwd-change
-Allow: /
-
-Sitemap: https://developstore.up.railway.app/sitemap.xml

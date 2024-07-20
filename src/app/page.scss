@@ -1,0 +1,242 @@
+@keyframes intro-reflex {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes intro-off {
+  from {
+    transform: translateX(-30rem);
+  }
+}
+
+@keyframes sales-image {
+  from {
+    transform: translateX(150%);
+  }
+}
+
+@keyframes outline {
+  to {
+    outline: 10rem solid #00000000;
+  }
+}
+
+@keyframes intro-li {
+  to {
+    transform: translateY(0);
+  }
+}
+
+.Home {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 2.5rem 0;
+  gap: 3rem;
+
+  .sales-container {
+    width: 100%;
+    display: flex;
+    padding: 5rem 10rem;
+    border-radius: 2rem;
+    background-image: linear-gradient(
+      110deg,
+      #ff4343 30%,
+      #fc6030,
+      #ffba24 100%
+    );
+    height: 30rem;
+    justify-content: space-between;
+    align-items: center;
+    overflow: hidden;
+    position: relative;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+
+    &::after,
+    &::before {
+      content: '';
+      background-color: #ffffff15;
+      position: absolute;
+      width: 10rem;
+      height: 150%;
+      transform: rotate(-20deg);
+      animation: 0.75s ease-out intro-reflex;
+    }
+
+    &::before {
+      left: 25%;
+    }
+
+    &::after {
+      left: 50%;
+    }
+
+    div,
+    picture {
+      z-index: 3;
+    }
+
+    .offer {
+      height: 100%;
+
+      h2,
+      h3 {
+        color: #fff;
+        font-weight: 300;
+      }
+
+      h2 {
+        font-size: 3rem;
+      }
+
+      h3 {
+        font-size: 5rem;
+        animation: 0.5s ease-out intro-off;
+      }
+
+      button {
+        background-color: #000;
+        border: 0.2rem solid transparent;
+        outline: 0;
+        padding: 1.2rem 2.3rem;
+        color: #fff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 1rem;
+        font-size: 1.5rem;
+        border-radius: 0.5rem;
+        transition: filter 0.3s, scale 0.1s;
+
+        img {
+          filter: invert(1);
+        }
+
+        &:hover {
+          filter: invert(1);
+          box-shadow: 0 0 1.5rem #ffffff25;
+        }
+
+        &:active {
+          scale: 0.9;
+        }
+      }
+    }
+
+    img {
+      filter: drop-shadow(0 0 0.75rem #00000030);
+    }
+
+    picture {
+      animation: 1s ease-out sales-image;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+    }
+  }
+
+  section {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    overflow: hidden;
+
+    h2 {
+      font-size: 2rem;
+      margin-right: auto;
+      font-weight: 400;
+      color: var(--black);
+    }
+
+    ul {
+      &.loading::before {
+        content: '';
+        display: block;
+        width: 100%;
+        height: 27.5rem;
+        border-radius: 0.75rem;
+        background-image: linear-gradient(110deg, #ccc, #ddd);
+      }
+    }
+
+    .control-container {
+      display: flex;
+    }
+
+    .scroll-container {
+      display: flex;
+      overflow: hidden;
+      border-radius: 0.5rem;
+
+      button {
+        padding: 0 1.5rem;
+        border: none;
+        background-color: transparent;
+        transition: background-color 0.2s;
+        display: flex;
+        align-items: center;
+        filter: invert(0.2);
+        justify-content: center;
+        outline: 0rem solid #00000030;
+
+        &:hover {
+          background-color: #00000030;
+        }
+
+        &:active {
+          animation: outline 0.25s ease-out;
+        }
+      }
+    }
+  }
+
+  #recommended-products ul li {
+    animation: 0.5s ease-out forwards intro-li;
+    animation-delay: calc(0.15s * var(--i));
+    transform: translateY(100%);
+  }
+}
+
+@media screen and (max-width: 768px) {
+  body {
+    padding: 1.5rem;
+  }
+
+  main {
+    margin-top: 7rem;
+
+    .sales-container {
+      padding: 5rem 2rem !important;
+      width: calc(100% + 3rem) !important;
+      transform: translateX(-1.5rem);
+      border-radius: 0 !important;
+      box-shadow: none !important;
+
+      &::before {
+        left: 10% !important;
+      }
+
+      &::after {
+        left: 60% !important;
+      }
+
+      .offer button,
+      .offer h2,
+      .offer h3 {
+        width: max-content;
+      }
+    }
+
+    section {
+      overflow: unset !important;
+
+      .scroll-left,
+      .scroll-right {
+        display: none !important;
+      }
+    }
+  }
+}
