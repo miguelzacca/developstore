@@ -19,7 +19,6 @@ export function ProductsUL({
   nullMessage,
 }: ProductsULProps) {
   const favoriteBtnRef = useRef<HTMLButtonElement[]>([])
-  if (typeof window === 'undefined') return
 
   const addFavoriteBtnRef = (index: number) => (element: HTMLButtonElement) => {
     favoriteBtnRef.current[index] = element
@@ -36,13 +35,13 @@ export function ProductsUL({
     if (parsedStoredFavorites.includes(productId)) {
       return localStorage.setItem(
         'favorites',
-        JSON.stringify(parsedStoredFavorites.filter((id) => id !== productId)),
+        JSON.stringify(parsedStoredFavorites.filter((id) => id !== productId))
       )
     }
 
     localStorage.setItem(
       'favorites',
-      JSON.stringify([...parsedStoredFavorites, productId]),
+      JSON.stringify([...parsedStoredFavorites, productId])
     )
   }
 

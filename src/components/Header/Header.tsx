@@ -3,6 +3,7 @@
 import Image from 'next/image'
 import { SearchInput } from '../SearchInput/SearchInput'
 import './Header.scss'
+import { useEffect, useState } from 'react'
 
 interface HeaderProps {
   path: string
@@ -10,9 +11,12 @@ interface HeaderProps {
 }
 
 export function Header({ path, searchInputRef }: HeaderProps) {
-  if (typeof window === 'undefined') return
+  const [favorites, setFavorites] = useState<string | null>()
 
-  const favorites = localStorage.getItem('favorites')
+  useEffect(() => {
+    const data = localStorage.getItem('favorites')
+    setFavorites(data)
+  }, [])
 
   return (
     <header>

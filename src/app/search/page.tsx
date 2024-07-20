@@ -11,6 +11,7 @@ import './page.scss'
 
 export default function Search() {
   const [inputValue, setInputValue] = useState('')
+  const [storedProducts, setStoredProducts] = useState<ProductEl[]>([])
 
   const searchInputRef = useRef<HTMLInputElement>(null)
 
@@ -34,9 +35,11 @@ export default function Search() {
     }
   }, [setSearch])
 
-  if (typeof window === 'undefined') return
+  useEffect(() => {
+    const data = JSON.parse(localStorage.getItem('storedProducts')!)
+    setStoredProducts(data)
+  }, [])
 
-  const storedProducts = JSON.parse(localStorage.getItem('storedProducts')!)
   const valid = (str: string) => str.trim().toLowerCase()
 
   const filter = inputValue || setSearch

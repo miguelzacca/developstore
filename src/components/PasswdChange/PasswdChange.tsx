@@ -9,12 +9,12 @@ import { utils } from '@/utils'
 const API_ADDR = process.env.NEXT_PUBLIC_API_ADDR
 
 export function PasswdChange() {
-  const form = useRef<HTMLFormElement>(document.createElement('form'))
+  const form = useRef<HTMLFormElement>(null)
   const msgRef = useRef<HTMLDivElement>(null)
   const [isPending, setPending] = useState(false)
 
   const changePasswd = () => {
-    const formData = new FormData(form.current)
+    const formData = new FormData(form.current || undefined)
     const jsonData = utils.formDataToJson(formData)
 
     setPending(true)
@@ -42,7 +42,7 @@ export function PasswdChange() {
   const handleFormSubmit = (e: FormEvent) => {
     e.preventDefault()
     changePasswd()
-    form.current.reset()
+    form.current?.reset()
   }
 
   return (

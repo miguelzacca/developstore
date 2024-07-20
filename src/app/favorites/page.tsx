@@ -1,5 +1,6 @@
 'use client'
 
+import { useEffect, useState } from 'react'
 import { utils } from '@/utils'
 import { ProductEl } from '@/types/global'
 
@@ -9,14 +10,15 @@ import { Header } from '@/components/Header/Header'
 import '../search/page.scss'
 
 export default function Favorites() {
-  if (typeof window === 'undefined') return
+  const [storedProducts, setStoredProducts] = useState<ProductEl[]>([])
 
-  const storedProducts = JSON.parse(
-    localStorage.getItem('storedProducts')!,
-  )
+  useEffect(() => {
+    const data = JSON.parse(localStorage.getItem('storedProducts')!)
+    setStoredProducts(data)
+  }, [])
 
   const nodeFavorites = storedProducts.filter((el: ProductEl) =>
-    utils.isFavorite(el.id),
+    utils.isFavorite(el.id)
   )
 
   return (
