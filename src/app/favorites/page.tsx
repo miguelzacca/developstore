@@ -9,6 +9,8 @@ import { Header } from '@/components/Header/Header'
 import '../search/page.scss'
 
 export default function Favorites() {
+  if (typeof window === 'undefined') return
+
   const storedProducts = JSON.parse(
     localStorage.getItem('storedProducts')!,
   )

@@ -49,6 +49,8 @@ class Utils {
   }
 
   public getURLSearchParam = (query: string) => {
+    if (typeof window === 'undefined') return
+
     return location.search
       ?.split(`${query}=`)[1]
       ?.split('&')[0]

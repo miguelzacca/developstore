@@ -29,6 +29,8 @@ export default function Home() {
   const [products, setProducts] = useState<ProductEl[]>([])
 
   useEffect(() => {
+    if (typeof window === 'undefined') return
+
     const fetchProducts = async () => {
       const storedProducts = localStorage.getItem('storedProducts')
       const newFetch = utils.has24hPassed()

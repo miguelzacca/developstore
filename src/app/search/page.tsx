@@ -12,16 +12,14 @@ import './page.scss'
 export default function Search() {
   const [inputValue, setInputValue] = useState('')
 
-  const searchInputRef = useRef<HTMLInputElement>(
-    document.createElement('input'),
-  )
+  const searchInputRef = useRef<HTMLInputElement>(null)
 
   const setSearch = utils.getURLSearchParam('set')
 
   useEffect(() => {
     setSearch
-      ? (searchInputRef.current.value = setSearch)
-      : searchInputRef.current.focus()
+      ? (searchInputRef.current!.value = setSearch)
+      : searchInputRef.current?.focus()
 
     const handleChange = (event: Event) => {
       const { value } = event.target as HTMLInputElement
@@ -36,9 +34,9 @@ export default function Search() {
     }
   }, [setSearch])
 
-  const storedProducts = JSON.parse(
-    localStorage.getItem('storedProducts')!,
-  )
+  if (typeof window === 'undefined') return
+
+  const storedProducts = JSON.parse(localStorage.getItem('storedProducts')!)
   const valid = (str: string) => str.trim().toLowerCase()
 
   const filter = inputValue || setSearch
@@ -46,8 +44,8 @@ export default function Search() {
   const filtereProducts = filter
     ? storedProducts.filter((el: ProductEl) =>
         valid(`${el.productName}${el.category}${el.info}`).includes(
-          valid(filter),
-        ),
+          valid(filter)
+        )
       )
     : storedProducts
 

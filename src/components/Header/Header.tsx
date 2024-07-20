@@ -6,10 +6,12 @@ import './Header.scss'
 
 interface HeaderProps {
   path: string
-  searchInputRef?: React.MutableRefObject<HTMLInputElement>
+  searchInputRef?: React.MutableRefObject<HTMLInputElement | null>
 }
 
 export function Header({ path, searchInputRef }: HeaderProps) {
+  if (typeof window === 'undefined') return
+
   const favorites = localStorage.getItem('favorites')
 
   return (

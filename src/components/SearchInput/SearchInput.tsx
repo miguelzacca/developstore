@@ -5,23 +5,23 @@ import "./SearchInput.scss";
 
 interface SearchInputProps {
   id: string;
-  searchInputRef?: React.MutableRefObject<HTMLInputElement>;
+  searchInputRef?: React.MutableRefObject<HTMLInputElement | null>;
 }
 
 export function SearchInput({ id, searchInputRef }: SearchInputProps) {
-  const redirectRef = useRef<HTMLInputElement>(document.createElement("input"));
+  const redirectRef = useRef<HTMLInputElement>(null);
 
   const redirect = () => {
     if (location.pathname !== "/search") {
       location.replace(
         `/search${
-          redirectRef.current.value && `?set=${redirectRef.current.value}`
+          redirectRef.current?.value && `?set=${redirectRef.current!.value}`
         }`,
       );
     }
   };
 
-  redirectRef.current.addEventListener("change", redirect);
+  redirectRef.current?.addEventListener("change", redirect);
 
   return (
     <div className="search-container">

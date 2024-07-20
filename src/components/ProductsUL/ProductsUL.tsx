@@ -19,6 +19,7 @@ export function ProductsUL({
   nullMessage,
 }: ProductsULProps) {
   const favoriteBtnRef = useRef<HTMLButtonElement[]>([])
+  if (typeof window === 'undefined') return
 
   const addFavoriteBtnRef = (index: number) => (element: HTMLButtonElement) => {
     favoriteBtnRef.current[index] = element
