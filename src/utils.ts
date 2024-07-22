@@ -85,6 +85,7 @@ class Utils {
   }
 
   public isFavorite = (id: number): boolean => {
+    if (typeof window === 'undefined') return false
     if (!isLoggedIn) return false
 
     const storedFavorites = sessionStorage.getItem('favoritesId')
@@ -93,6 +94,7 @@ class Utils {
   }
 
   public getAllFavorites = async () => {
+    if (typeof window === 'undefined') return
     if (!isLoggedIn) return []
 
     return await fetch(`${API_ADDR}/user/get-favorites`, {
@@ -102,13 +104,14 @@ class Utils {
       sessionStorage.setItem('favorites', JSON.stringify(data))
       sessionStorage.setItem(
         'favoritesId',
-        JSON.stringify(data.map((el: ProductEl) => el.id))
+        JSON.stringify(data.map((el: ProductEl) => el.id)),
       )
       return data
     })
   }
 
   public toggleFavorite = (productId: number) => {
+    if (typeof window === 'undefined') return
     if (!isLoggedIn) return
 
     fetch(`${API_ADDR}/user/toggle-favorite`, {
@@ -126,13 +129,13 @@ class Utils {
     if (parsedFavorites?.includes(productId)) {
       return sessionStorage.setItem(
         'favorites',
-        JSON.stringify(parsedFavorites.filter((id: number) => id === id))
+        JSON.stringify(parsedFavorites.filter((id: number) => id === id)),
       )
     }
 
     sessionStorage.setItem(
       'favorites',
-      JSON.stringify([...parsedFavorites, productId])
+      JSON.stringify([...parsedFavorites, productId]),
     )
   }
 
