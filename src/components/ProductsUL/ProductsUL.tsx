@@ -26,23 +26,7 @@ export function ProductsUL({
 
   const favorite = (index: number, productId: number) => {
     favoriteBtnRef.current[index].classList.toggle('checked')
-
-    const storedFavorites = localStorage.getItem('favorites')
-    const parsedStoredFavorites: number[] = storedFavorites
-      ? JSON.parse(storedFavorites)
-      : []
-
-    if (parsedStoredFavorites.includes(productId)) {
-      return localStorage.setItem(
-        'favorites',
-        JSON.stringify(parsedStoredFavorites.filter((id) => id !== productId))
-      )
-    }
-
-    localStorage.setItem(
-      'favorites',
-      JSON.stringify([...parsedStoredFavorites, productId])
-    )
+    utils.toggleFavorite(productId)
   }
 
   return (
@@ -68,7 +52,7 @@ export function ProductsUL({
                 width={175}
                 height={175}
                 alt="Product image"
-                priority
+                priority={true}
               />
             </picture>
             <div className="info-container">

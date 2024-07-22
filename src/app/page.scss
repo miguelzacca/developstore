@@ -28,12 +28,21 @@
   }
 }
 
-.Home {
+main#Home {
   width: 100%;
   display: flex;
   flex-direction: column;
   padding: 2.5rem 0;
   gap: 3rem;
+
+  &.loading ul::before {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 27.5rem;
+    border-radius: 0.75rem;
+    background-image: linear-gradient(110deg, #ccc, #ddd);
+  }
 
   .sales-container {
     width: 100%;
@@ -107,7 +116,9 @@
         gap: 1rem;
         font-size: 1.5rem;
         border-radius: 0.5rem;
-        transition: filter 0.3s, scale 0.1s;
+        transition:
+          filter 0.3s,
+          scale 0.1s;
 
         img {
           filter: invert(1);
@@ -149,17 +160,6 @@
       margin-right: auto;
       font-weight: 400;
       color: var(--black);
-    }
-
-    ul {
-      &.loading::before {
-        content: '';
-        display: block;
-        width: 100%;
-        height: 27.5rem;
-        border-radius: 0.75rem;
-        background-image: linear-gradient(110deg, #ccc, #ddd);
-      }
     }
 
     .control-container {

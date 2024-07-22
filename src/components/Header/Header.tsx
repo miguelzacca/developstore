@@ -4,6 +4,7 @@ import Image from 'next/image'
 import { SearchInput } from '../SearchInput/SearchInput'
 import './Header.scss'
 import { useEffect, useState } from 'react'
+import { utils } from '@/utils'
 
 interface HeaderProps {
   path: string
@@ -11,11 +12,12 @@ interface HeaderProps {
 }
 
 export function Header({ path, searchInputRef }: HeaderProps) {
-  const [favorites, setFavorites] = useState<string | null>()
+  const [favorites, setFavorites] = useState(false)
 
   useEffect(() => {
-    const data = localStorage.getItem('favorites')
-    setFavorites(data)
+    utils.getAllFavorites().then((data) => {
+      setFavorites(!!data[0])
+    })
   }, [])
 
   return (
@@ -43,9 +45,7 @@ export function Header({ path, searchInputRef }: HeaderProps) {
           </a>
           <a
             href="./favorites"
-            className={`favorite-link ${
-              favorites && favorites.length > 2 ? 'alert' : ''
-            }`}
+            className={`favorite-link ${favorites ? 'alert' : ''}`}
           >
             <Image
               src="/images/favorite-icon.webp"

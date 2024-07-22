@@ -11,6 +11,12 @@ import { ProductsUL } from '@/components/ProductsUL/ProductsUL'
 
 import './page.scss'
 
+interface Products {
+  recommended: ProductEl[]
+  popular: ProductEl[]
+  best: ProductEl[]
+}
+
 export default function Home() {
   const ulRefs = useRef<HTMLUListElement[]>([])
   const moveScrollValue = 500
@@ -26,44 +32,36 @@ export default function Home() {
     ulRefs.current[index] = element
   }
 
-  const [products, setProducts] = useState<ProductEl[]>([])
+  const [products, setProducts] = useState<Products>({
+    recommended: [],
+    popular: [],
+    best: [],
+  })
 
   useEffect(() => {
-    if (typeof window === 'undefined') return
-
     const fetchProducts = async () => {
-      const storedProducts = localStorage.getItem('storedProducts')
-      const newFetch = utils.has24hPassed()
+      const recommendedReq = utils.getProducts({ category: 'Recommended' })
+      const popularReq = utils.getProducts({ category: 'Popular 2024' })
+      const bestReq = utils.getProducts({ category: 'The best' })
 
-      if (storedProducts && !newFetch) {
-        return setProducts(JSON.parse(storedProducts))
-      }
+      const [recommended, popular, best] = await Promise.all([
+        recommendedReq,
+        popularReq,
+        bestReq,
+      ])
 
-      const fetchedProducts = await utils.getAllProducts()
-      setProducts(fetchedProducts)
-      localStorage.setItem(
-        'storedProducts',
-        JSON.stringify(fetchedProducts),
-      )
+      setProducts({ recommended, popular, best })
     }
 
     fetchProducts()
   }, [])
 
-  const recommendedProducts = products.filter(
-    (el) => el.category === 'Recommended',
-  )
-
-  const popular2024Products = products.filter(
-    (el) => el.category === 'Popular 2024',
-  )
-
-  const theBestProducts = products.filter((el) => el.category === 'The best')
+  const productsExists = !!products.recommended[0]
 
   return (
     <>
       <Header path="home" />
-      <main id="Home" className="Home">
+      <main id="Home" className={productsExists ? undefined : 'loading'}>
         <div className="sales-container">
           <div className="offer">
             <h2>
@@ -82,9 +80,9 @@ export default function Home() {
             </button>
           </div>
           <picture>
-            {products[0] ? (
+            {productsExists ? (
               <Image
-                src={products[0].img}
+                src={products.recommended[0].img}
                 width={250}
                 height={250}
                 alt="Sale product image"
@@ -103,7 +101,7 @@ export default function Home() {
               >
                 <Image
                   src="/images/arrow-left.webp"
-                  width={25}
+                  width={22.5}
                   height={20}
                   alt="Arrow left icon"
                 />
@@ -114,15 +112,15 @@ export default function Home() {
               >
                 <Image
                   src="/images/arrow-right.webp"
-                  width={25}
+                  width={22.5}
                   height={20}
                   alt="Arrow right icon"
                 />
               </button>
             </div>
           </div>
-          <ul ref={addUlRef(0)} className={products[0] ? undefined : 'loading'}>
-            <ProductsUL products={recommendedProducts} animation={true} />
+          <ul ref={addUlRef(0)}>
+            <ProductsUL products={products.recommended} animation={true} />
           </ul>
         </section>
         <section id="popular-products">
@@ -135,7 +133,7 @@ export default function Home() {
               >
                 <Image
                   src="/images/arrow-left.webp"
-                  width={25}
+                  width={22.5}
                   height={20}
                   alt="Arrow left icon"
                 />
@@ -146,15 +144,15 @@ export default function Home() {
               >
                 <Image
                   src="/images/arrow-right.webp"
-                  width={25}
+                  width={22.5}
                   height={20}
                   alt="Arrow right icon"
                 />
               </button>
             </div>
           </div>
-          <ul ref={addUlRef(1)} className={products[0] ? undefined : 'loading'}>
-            <ProductsUL products={popular2024Products} />
+          <ul ref={addUlRef(1)}>
+            <ProductsUL products={products.popular} />
           </ul>
         </section>
         <section id="best-products">
@@ -167,7 +165,7 @@ export default function Home() {
               >
                 <Image
                   src="/images/arrow-left.webp"
-                  width={25}
+                  width={22.5}
                   height={20}
                   alt="Arrow left icon"
                 />
@@ -178,15 +176,15 @@ export default function Home() {
               >
                 <Image
                   src="/images/arrow-right.webp"
-                  width={25}
+                  width={22.5}
                   height={20}
                   alt="Arrow right icon"
                 />
               </button>
             </div>
           </div>
-          <ul ref={addUlRef(2)} className={products[0] ? undefined : 'loading'}>
-            <ProductsUL products={theBestProducts} />
+          <ul ref={addUlRef(2)}>
+            <ProductsUL products={products.best} />
           </ul>
         </section>
       </main>

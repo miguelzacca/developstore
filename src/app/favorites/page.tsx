@@ -10,23 +10,15 @@ import { Header } from '@/components/Header/Header'
 import '../search/page.scss'
 
 export default function Favorites() {
-  const [storedProducts, setStoredProducts] = useState<ProductEl[]>([])
-
-  useEffect(() => {
-    const data = JSON.parse(localStorage.getItem('storedProducts')!)
-    setStoredProducts(data)
-  }, [])
-
-  const nodeFavorites = storedProducts.filter((el: ProductEl) =>
-    utils.isFavorite(el.id)
-  )
+  const storedFavorites = sessionStorage.getItem('favorites')
+  const parsedFavorites = storedFavorites ? JSON.parse(storedFavorites) : []
 
   return (
     <>
       <Header path="favorites" />
       <main id="Favorites">
         <ul>
-          <ProductsUL products={nodeFavorites} nullMessage="<Empty>" />
+          <ProductsUL products={parsedFavorites} nullMessage="<Empty>" />
         </ul>
       </main>
     </>

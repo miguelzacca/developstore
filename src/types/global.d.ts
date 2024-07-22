@@ -7,3 +7,9 @@ export interface ProductEl {
   oldPrice?: number
   price: number
 }
+
+export interface UserData {
+  uname: string
+  email: string
+  createdAt: string
+}

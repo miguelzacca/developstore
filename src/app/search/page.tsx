@@ -11,53 +11,59 @@ import './page.scss'
 
 export default function Search() {
   const [inputValue, setInputValue] = useState('')
-  const [storedProducts, setStoredProducts] = useState<ProductEl[]>([])
+  const [products, setProducts] = useState<ProductEl[]>([])
+  const [isPending, setPending] = useState(true)
 
   const searchInputRef = useRef<HTMLInputElement>(null)
-
   const setSearch = utils.getURLSearchParam('set')
 
   useEffect(() => {
+    const searchInputElement = searchInputRef.current!
+
     setSearch
-      ? (searchInputRef.current!.value = setSearch)
-      : searchInputRef.current?.focus()
+      ? (searchInputElement.value = setSearch)
+      : searchInputElement.focus()
 
     const handleChange = (event: Event) => {
       const { value } = event.target as HTMLInputElement
       setInputValue(value)
     }
 
-    const inputElement = searchInputRef.current
-    if (inputElement) {
-      inputElement.addEventListener('change', handleChange)
-
-      return () => inputElement.removeEventListener('change', handleChange)
-    }
+    searchInputElement.addEventListener('change', handleChange)
+    return () => searchInputElement.removeEventListener('change', handleChange)
   }, [setSearch])
 
+  const search = inputValue || setSearch
+
   useEffect(() => {
-    const data = JSON.parse(localStorage.getItem('storedProducts')!)
-    setStoredProducts(data)
-  }, [])
+    const categories: Record<string, boolean> = {
+      Recommended: true,
+      'Popular 2024': true,
+      'The best': true,
+    }
 
-  const valid = (str: string) => str.trim().toLowerCase()
+    const fetchProducts = async () => {
+      if (search && categories[search]) {
+        return await utils.getProducts({ category: search })
+      }
 
-  const filter = inputValue || setSearch
+      return await utils.getProducts(search ? { search } : undefined)
+    }
 
-  const filtereProducts = filter
-    ? storedProducts.filter((el: ProductEl) =>
-        valid(`${el.productName}${el.category}${el.info}`).includes(
-          valid(filter)
-        )
-      )
-    : storedProducts
+    fetchProducts().then((data) => setProducts(data))
+
+    setPending(false)
+  }, [search])
 
   return (
     <>
       <Header path="search" searchInputRef={searchInputRef} />
       <main id="Search">
-        <ul>
-          <ProductsUL products={filtereProducts} nullMessage="<Empty>" />
+        <ul className={isPending ? 'loading' : ''}>
+          <ProductsUL
+            products={products}
+            nullMessage={isPending ? undefined : '<Empty>'}
+          />
         </ul>
       </main>
     </>

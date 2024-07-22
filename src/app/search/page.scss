@@ -19,27 +19,35 @@ main#Favorites {
 
     li {
       flex: 1;
-      max-width: 21.5rem;
+      max-width: 20rem;
+    }
+
+    &.loading::before {
+      content: 'Loading...';
+      display: block;
+      font-weight: 400;
+      font-size: 1.7rem;
+      color: var(--black);
     }
   }
+}
 
-  @media screen and (max-width: 768px) {
-    ul {
-      transform: none !important;
-      margin-top: 10rem !important;
-      width: 100vw;
-    }
+@media screen and (max-width: 768px) {
+  ul {
+    transform: none !important;
+    margin-top: 10rem !important;
+    width: 100vw;
   }
+}
 
-  @media screen and (max-width: 400px) {
-    ul {
-      display: grid;
-      grid-template-columns: auto auto;
-      gap: 0.5rem !important;
+@media screen and (max-width: 400px) {
+  ul {
+    display: grid;
+    grid-template-columns: auto auto;
+    gap: 0.5rem !important;
 
-      li {
-        width: 17rem;
-      }
+    li {
+      width: 17rem;
     }
   }
 }

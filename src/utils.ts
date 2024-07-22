@@ -1,5 +1,5 @@
 import { RefObject } from 'react'
-import { ProductEl } from './types/global'
+import { ProductEl, UserData } from './types/global'
 
 const API_ADDR = process.env.NEXT_PUBLIC_API_ADDR
 
@@ -11,7 +11,21 @@ interface IObjFromFormData {
   [key: string]: FormDataEntryValue
 }
 
-type GetAllProducts = () => Promise<ProductEl[]>
+type GetProducts = (filters?: {
+  search?: string
+  category?: string
+}) => Promise<ProductEl[]>
+
+let isLoggedIn = false
+let userData: UserData
+
+fetch(`${API_ADDR}/user`, { credentials: 'include' }).then((res) => {
+  isLoggedIn = res.ok
+
+  res.json().then((data) => {
+    userData = data
+  })
+})
 
 class Utils {
   private animeMsg = async (display: Element) => {
@@ -43,9 +57,21 @@ class Utils {
     this.animeMsg(display)
   }
 
-  public getAllProducts: GetAllProducts = async () => {
-    localStorage.setItem('lastFetch', new Date().getTime().toString())
-    return await fetch(`${API_ADDR}/products`).then((res) => res.json())
+  public getProducts: GetProducts = async (filters) => {
+    if (!filters) {
+      const res = await fetch(`${API_ADDR}/products`)
+      return await res.json()
+    }
+
+    const { search, category } = filters
+
+    if (category) {
+      const res = await fetch(`${API_ADDR}/products?category=${category}`)
+      return await res.json()
+    }
+
+    const res = await fetch(`${API_ADDR}/products?search=${search}`)
+    return await res.json()
   }
 
   public getURLSearchParam = (query: string) => {
@@ -58,17 +84,63 @@ class Utils {
       .join(' ')
   }
 
-  public has24hPassed = () => {
-    const lastFetch = Number(localStorage.getItem('lastFetch'))
-    const currentTime = new Date().getTime()
-    const relativeTime = 24 * 60 * 60 * 1000
-    return currentTime - lastFetch >= relativeTime
-  }
-
   public isFavorite = (id: number): boolean => {
-    const storedFavorites = localStorage.getItem('favorites')
+    if (!isLoggedIn) return false
+
+    const storedFavorites = sessionStorage.getItem('favoritesId')
     const parsedFavorites = storedFavorites ? JSON.parse(storedFavorites) : []
     return parsedFavorites.includes(id)
+  }
+
+  public getAllFavorites = async () => {
+    if (!isLoggedIn) return []
+
+    return await fetch(`${API_ADDR}/user/get-favorites`, {
+      credentials: 'include',
+    }).then(async (res) => {
+      const data = await res.json()
+      sessionStorage.setItem('favorites', JSON.stringify(data))
+      sessionStorage.setItem(
+        'favoritesId',
+        JSON.stringify(data.map((el: ProductEl) => el.id))
+      )
+      return data
+    })
+  }
+
+  public toggleFavorite = (productId: number) => {
+    if (!isLoggedIn) return
+
+    fetch(`${API_ADDR}/user/toggle-favorite`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ productId }),
+      credentials: 'include',
+    })
+
+    const storedFavorites = sessionStorage.getItem('favorites')
+    const parsedFavorites = storedFavorites ? JSON.parse(storedFavorites) : []
+
+    if (parsedFavorites?.includes(productId)) {
+      return sessionStorage.setItem(
+        'favorites',
+        JSON.stringify(parsedFavorites.filter((id: number) => id === id))
+      )
+    }
+
+    sessionStorage.setItem(
+      'favorites',
+      JSON.stringify([...parsedFavorites, productId])
+    )
+  }
+
+  public get User() {
+    return {
+      isLoggedIn,
+      data: userData,
+    }
   }
 }
 
