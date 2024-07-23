@@ -2,20 +2,25 @@
 
 import { useEffect, useState } from 'react'
 import { ProductEl } from '@/types/global'
+import { AuthProvider } from '@/contexts/AuthContext'
+import { useAuth } from '@/hooks/useAuth'
 
 import { ProductsUL } from '@/components/ProductsUL/ProductsUL'
 import { Header } from '@/components/Header/Header'
 
 import '../search/page.scss'
 
-export default function Favorites() {
+function FavoritesPage() {
   const [favorites, setFavorites] = useState<ProductEl[]>([])
+  const { isLoggedIn } = useAuth()
 
   useEffect(() => {
+    if (!isLoggedIn) return location.replace('/login')
+
     const storedFavorites = sessionStorage.getItem('favorites')
     const parsedFavorites = storedFavorites ? JSON.parse(storedFavorites) : []
     setFavorites(parsedFavorites)
-  }, [])
+  }, [isLoggedIn])
 
   return (
     <>
@@ -26,5 +31,13 @@ export default function Favorites() {
         </ul>
       </main>
     </>
+  )
+}
+
+export default function Favorites() {
+  return (
+    <AuthProvider>
+      <FavoritesPage />
+    </AuthProvider>
   )
 }

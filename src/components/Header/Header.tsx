@@ -5,6 +5,7 @@ import { SearchInput } from '../SearchInput/SearchInput'
 import './Header.scss'
 import { useEffect, useState } from 'react'
 import { utils } from '@/utils'
+import { useAuth } from '@/hooks/useAuth'
 
 interface HeaderProps {
   path: string
@@ -13,12 +14,15 @@ interface HeaderProps {
 
 export function Header({ path, searchInputRef }: HeaderProps) {
   const [favorites, setFavorites] = useState(false)
+  const { isLoggedIn } = useAuth()
 
   useEffect(() => {
-    utils.getAllFavorites().then((data) => {
-      setFavorites(!!data[0])
-    })
-  }, [])
+    if (isLoggedIn) {
+      utils.getAllFavorites().then((data) => {
+        setFavorites(!!data[0])
+      })
+    }
+  }, [isLoggedIn])
 
   return (
     <header>
@@ -26,6 +30,7 @@ export function Header({ path, searchInputRef }: HeaderProps) {
         <a href="/" className="refresh-link">
           <Image
             src="/images/logo.webp"
+            priority
             width={60}
             height={35}
             className="logo"

@@ -1,7 +1,8 @@
 'use client'
 
+import { useAuth } from '@/hooks/useAuth'
 import { ProductEl } from '@/types/global'
-import { useRef } from 'react'
+import { useEffect, useRef } from 'react'
 import { utils } from '@/utils'
 import Image from 'next/image'
 
@@ -19,14 +20,18 @@ export function ProductsUL({
   nullMessage,
 }: ProductsULProps) {
   const favoriteBtnRef = useRef<HTMLButtonElement[]>([])
+  const { isLoggedIn } = useAuth()
 
   const addFavoriteBtnRef = (index: number) => (element: HTMLButtonElement) => {
     favoriteBtnRef.current[index] = element
   }
 
   const favorite = (index: number, productId: number) => {
-    favoriteBtnRef.current[index].classList.toggle('checked')
-    utils.toggleFavorite(productId)
+    if (isLoggedIn) {
+      favoriteBtnRef.current[index].classList.toggle('checked')
+      return utils.toggleFavorite(productId)
+    }
+    utils.redirectToLogin()
   }
 
   return (

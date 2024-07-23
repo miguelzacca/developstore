@@ -1,5 +1,5 @@
 import { RefObject } from 'react'
-import { ProductEl, UserData } from './types/global'
+import { ProductEl } from './types/global'
 
 const API_ADDR = process.env.NEXT_PUBLIC_API_ADDR
 
@@ -15,17 +15,6 @@ type GetProducts = (filters?: {
   search?: string
   category?: string
 }) => Promise<ProductEl[]>
-
-let isLoggedIn = false
-let userData: UserData
-
-fetch(`${API_ADDR}/user`, { credentials: 'include' }).then((res) => {
-  isLoggedIn = res.ok
-
-  res.json().then((data) => {
-    userData = data
-  })
-})
 
 class Utils {
   private animeMsg = async (display: Element) => {
@@ -86,7 +75,6 @@ class Utils {
 
   public isFavorite = (id: number): boolean => {
     if (typeof window === 'undefined') return false
-    if (!isLoggedIn) return false
 
     const storedFavorites = sessionStorage.getItem('favoritesId')
     const parsedFavorites = storedFavorites ? JSON.parse(storedFavorites) : []
@@ -95,7 +83,6 @@ class Utils {
 
   public getAllFavorites = async () => {
     if (typeof window === 'undefined') return
-    if (!isLoggedIn) return []
 
     return await fetch(`${API_ADDR}/user/get-favorites`, {
       credentials: 'include',
@@ -112,7 +99,6 @@ class Utils {
 
   public toggleFavorite = (productId: number) => {
     if (typeof window === 'undefined') return
-    if (!isLoggedIn) return
 
     fetch(`${API_ADDR}/user/toggle-favorite`, {
       method: 'POST',
@@ -139,11 +125,9 @@ class Utils {
     )
   }
 
-  public get User() {
-    return {
-      isLoggedIn,
-      data: userData,
-    }
+  public redirectToLogin = () => {
+    if (typeof window === 'undefined') return
+    location.replace('/login')
   }
 }
 
