@@ -31,7 +31,7 @@ export function ProductsUL({
       favoriteBtnRef.current[index].classList.toggle('checked')
       return utils.toggleFavorite(productId)
     }
-    utils.redirectToLogin()
+    utils.redirectTo('/login')
   }
 
   return (

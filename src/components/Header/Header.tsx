@@ -14,7 +14,7 @@ interface HeaderProps {
 
 export function Header({ path, searchInputRef }: HeaderProps) {
   const [favorites, setFavorites] = useState(false)
-  const { isLoggedIn } = useAuth()
+  const { isLoggedIn } = useAuth()  
 
   useEffect(() => {
     if (isLoggedIn) {
@@ -23,6 +23,13 @@ export function Header({ path, searchInputRef }: HeaderProps) {
       })
     }
   }, [isLoggedIn])
+
+  const accessTest = () => {    
+    if (!isLoggedIn) {
+      return utils.redirectTo('/login')
+    }
+    utils.redirectTo('/favorites')
+  }
 
   return (
     <header>
@@ -49,8 +56,8 @@ export function Header({ path, searchInputRef }: HeaderProps) {
             Account
           </a>
           <a
-            href="./favorites"
             className={`favorite-link ${favorites ? 'alert' : ''}`}
+            onClick={() => accessTest()}
           >
             <Image
               src="/images/favorite-icon.webp"

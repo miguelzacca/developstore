@@ -76,7 +76,7 @@ class Utils {
   public isFavorite = (id: number): boolean => {
     if (typeof window === 'undefined') return false
 
-    const storedFavorites = sessionStorage.getItem('favoritesId')
+    const storedFavorites = localStorage.getItem('favoritesId')
     const parsedFavorites = storedFavorites ? JSON.parse(storedFavorites) : []
     return parsedFavorites.includes(id)
   }
@@ -89,9 +89,9 @@ class Utils {
     }).then(async (res) => {
       const data = await res.json()
       sessionStorage.setItem('favorites', JSON.stringify(data))
-      sessionStorage.setItem(
+      localStorage.setItem(
         'favoritesId',
-        JSON.stringify(data.map((el: ProductEl) => el.id)),
+        JSON.stringify(data.map((el: ProductEl) => el.id))
       )
       return data
     })
@@ -109,25 +109,25 @@ class Utils {
       credentials: 'include',
     })
 
-    const storedFavorites = sessionStorage.getItem('favorites')
+    const storedFavorites = sessionStorage.getItem('favoritesId')
     const parsedFavorites = storedFavorites ? JSON.parse(storedFavorites) : []
 
     if (parsedFavorites?.includes(productId)) {
-      return sessionStorage.setItem(
-        'favorites',
-        JSON.stringify(parsedFavorites.filter((id: number) => id === id)),
+      return localStorage.setItem(
+        'favoritesId',
+        JSON.stringify(parsedFavorites.filter((id: number) => id === id))
       )
     }
 
-    sessionStorage.setItem(
-      'favorites',
-      JSON.stringify([...parsedFavorites, productId]),
+    localStorage.setItem(
+      'favoritesId',
+      JSON.stringify([...parsedFavorites, productId])
     )
   }
 
-  public redirectToLogin = () => {
+  public redirectTo = (path: string) => {
     if (typeof window === 'undefined') return
-    location.replace('/login')
+    location.replace(path)
   }
 }
 
