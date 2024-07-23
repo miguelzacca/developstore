@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react'
 import { utils } from '@/utils'
+import { AuthProvider } from '@/contexts/AuthContext'
 
 import { Header } from '@/components/Header/Header'
 import { ProductEl } from '@/types/global'
@@ -56,16 +57,18 @@ export default function Search() {
   }, [search])
 
   return (
-    <>
-      <Header path="search" searchInputRef={searchInputRef} />
-      <main id="Search">
-        <ul className={isPending ? 'loading' : ''}>
-          <ProductsUL
-            products={products}
-            nullMessage={isPending ? undefined : '<Empty>'}
-          />
-        </ul>
-      </main>
-    </>
+    <AuthProvider>
+      <>
+        <Header path="search" searchInputRef={searchInputRef} />
+        <main id="Search">
+          <ul className={isPending ? 'loading' : ''}>
+            <ProductsUL
+              products={products}
+              nullMessage={isPending ? undefined : '<Empty>'}
+            />
+          </ul>
+        </main>
+      </>
+    </AuthProvider>
   )
 }
