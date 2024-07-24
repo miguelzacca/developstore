@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import { ProductEl } from '@/types/global'
+import { utils } from '@/utils'
 import { AuthProvider } from '@/contexts/AuthContext'
 
 import { ProductsUL } from '@/components/ProductsUL/ProductsUL'
@@ -13,9 +14,9 @@ function FavoritesPage() {
   const [favorites, setFavorites] = useState<ProductEl[]>([])
 
   useEffect(() => {
-    const storedFavorites = sessionStorage.getItem('favorites')
-    const parsedFavorites = storedFavorites ? JSON.parse(storedFavorites) : []
-    setFavorites(parsedFavorites)
+    utils.getAllFavorites().then((data) => {
+      setFavorites(data)
+    })
   }, [])
 
   return (

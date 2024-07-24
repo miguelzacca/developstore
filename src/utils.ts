@@ -76,9 +76,20 @@ class Utils {
   public isFavorite = (id: number): boolean => {
     if (typeof window === 'undefined') return false
 
-    const storedFavorites = localStorage.getItem('favoritesId')
-    const parsedFavorites = storedFavorites ? JSON.parse(storedFavorites) : []
-    return parsedFavorites.includes(id)
+    const storedFavoritesId = sessionStorage.getItem('favoritesId')
+
+    if (!storedFavoritesId || storedFavoritesId.length <= 2) {
+      const storedFavorites = sessionStorage.getItem('favorites')
+      const parsedFavorites = storedFavorites ? JSON.parse(storedFavorites) : []
+      const favoritesId = parsedFavorites.map((el: ProductEl) => el.id)
+      sessionStorage.setItem('favoritesId', JSON.stringify(favoritesId))
+      return favoritesId.includes(id)
+    }
+
+    const parsedFavoritesId = storedFavoritesId
+      ? JSON.parse(storedFavoritesId)
+      : []
+    return parsedFavoritesId.includes(id)
   }
 
   public getAllFavorites = async () => {
@@ -89,10 +100,6 @@ class Utils {
     }).then(async (res) => {
       const data = await res.json()
       sessionStorage.setItem('favorites', JSON.stringify(data))
-      localStorage.setItem(
-        'favoritesId',
-        JSON.stringify(data.map((el: ProductEl) => el.id))
-      )
       return data
     })
   }
@@ -109,19 +116,23 @@ class Utils {
       credentials: 'include',
     })
 
-    const storedFavorites = sessionStorage.getItem('favoritesId')
-    const parsedFavorites = storedFavorites ? JSON.parse(storedFavorites) : []
+    const storedFavoritesId = sessionStorage.getItem('favoritesId')
+    const parsedFavoritesId = storedFavoritesId
+      ? JSON.parse(storedFavoritesId)
+      : []
 
-    if (parsedFavorites?.includes(productId)) {
-      return localStorage.setItem(
+    if (parsedFavoritesId.includes(productId)) {
+      return sessionStorage.setItem(
         'favoritesId',
-        JSON.stringify(parsedFavorites.filter((id: number) => id === id))
+        JSON.stringify(
+          parsedFavoritesId.filter((id: number) => id !== productId),
+        ),
       )
     }
 
-    localStorage.setItem(
+    sessionStorage.setItem(
       'favoritesId',
-      JSON.stringify([...parsedFavorites, productId])
+      JSON.stringify([...parsedFavoritesId, productId]),
     )
   }
 
