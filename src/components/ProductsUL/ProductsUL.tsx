@@ -2,7 +2,7 @@
 
 import { useAuth } from '@/hooks/useAuth'
 import { ProductEl } from '@/types/global'
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { utils } from '@/utils'
 import Image from 'next/image'
 
@@ -20,6 +20,7 @@ export function ProductsUL({
   nullMessage,
 }: ProductsULProps) {
   const favoriteBtnRef = useRef<HTMLButtonElement[]>([])
+  const [favorites, setFavorites] = useState<number[]>([])
   const { isLoggedIn } = useAuth()
 
   const addFavoriteBtnRef = (index: number) => (element: HTMLButtonElement) => {
@@ -34,6 +35,12 @@ export function ProductsUL({
     utils.redirectTo('/login')
   }
 
+  useEffect(() => {
+    utils.getAllFavorites().then((data) => {
+      setFavorites(data.map((el: ProductEl) => el.id))
+    })
+  }, [])
+
   return (
     <>
       {products[0] ? (
@@ -45,7 +52,9 @@ export function ProductsUL({
             }
           >
             <button
-              className={`favorite ${utils.isFavorite(el.id) ? 'checked' : ''}`}
+              className={`favorite ${
+                favorites.includes(el.id) ? 'checked' : ''
+              }`}
               ref={addFavoriteBtnRef(i)}
               onClick={() => favorite(i, el.id)}
             >

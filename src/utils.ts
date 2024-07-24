@@ -73,41 +73,20 @@ class Utils {
       .join(' ')
   }
 
-  public isFavorite = (id: number): boolean => {
-    if (typeof window === 'undefined') return false
-
-    const storedFavoritesId = sessionStorage.getItem('favoritesId')
-
-    if (!storedFavoritesId || storedFavoritesId.length <= 2) {
-      const storedFavorites = sessionStorage.getItem('favorites')
-      const parsedFavorites = storedFavorites ? JSON.parse(storedFavorites) : []
-      const favoritesId = parsedFavorites.map((el: ProductEl) => el.id)
-      sessionStorage.setItem('favoritesId', JSON.stringify(favoritesId))
-      return favoritesId.includes(id)
-    }
-
-    const parsedFavoritesId = storedFavoritesId
-      ? JSON.parse(storedFavoritesId)
-      : []
-    return parsedFavoritesId.includes(id)
-  }
-
   public getAllFavorites = async () => {
     if (typeof window === 'undefined') return
 
     return await fetch(`${API_ADDR}/user/get-favorites`, {
       credentials: 'include',
     }).then(async (res) => {
-      const data = await res.json()
-      sessionStorage.setItem('favorites', JSON.stringify(data))
-      return data
+      return await res.json()
     })
   }
 
-  public toggleFavorite = (productId: number) => {
+  public toggleFavorite = async (productId: number) => {
     if (typeof window === 'undefined') return
 
-    fetch(`${API_ADDR}/user/toggle-favorite`, {
+    await fetch(`${API_ADDR}/user/toggle-favorite`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -115,25 +94,6 @@ class Utils {
       body: JSON.stringify({ productId }),
       credentials: 'include',
     })
-
-    const storedFavoritesId = sessionStorage.getItem('favoritesId')
-    const parsedFavoritesId = storedFavoritesId
-      ? JSON.parse(storedFavoritesId)
-      : []
-
-    if (parsedFavoritesId.includes(productId)) {
-      return sessionStorage.setItem(
-        'favoritesId',
-        JSON.stringify(
-          parsedFavoritesId.filter((id: number) => id !== productId),
-        ),
-      )
-    }
-
-    sessionStorage.setItem(
-      'favoritesId',
-      JSON.stringify([...parsedFavoritesId, productId]),
-    )
   }
 
   public redirectTo = (path: string) => {
