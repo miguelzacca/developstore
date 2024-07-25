@@ -1,4 +1,6 @@
-import { createContext, useEffect, useState } from 'react'
+'use client'
+
+import { createContext, useCallback, useEffect, useState } from 'react'
 import { UserData } from '@/types/global'
 
 const API_ADDR = process.env.NEXT_PUBLIC_API_ADDR
@@ -19,7 +21,7 @@ export function AuthProvider({ children }: AuthProviderType) {
   const [isLoggedIn, setIsLoggedIn] = useState(false)
   const [User, setUser] = useState<UserData>()
 
-  const checkAuth = async () => {
+  const checkAuth = useCallback(async () => {
     const res = await fetch(`${API_ADDR}/user`, { credentials: 'include' })
     if (res.ok) {
       setIsLoggedIn(true)
@@ -27,11 +29,11 @@ export function AuthProvider({ children }: AuthProviderType) {
       return true
     }
     return false
-  }
+  }, [])
 
   useEffect(() => {
     checkAuth()
-  }, [])
+  }, [checkAuth])
 
   return (
     <AuthContext.Provider value={{ isLoggedIn, User, checkAuth }}>

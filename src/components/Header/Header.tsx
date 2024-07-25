@@ -3,8 +3,8 @@
 import Image from 'next/image'
 import { SearchInput } from '../SearchInput/SearchInput'
 import './Header.scss'
-import { useEffect, useState } from 'react'
 import { utils } from '@/utils'
+import { useFavorites } from '@/hooks/useFavorites'
 import { useAuth } from '@/hooks/useAuth'
 
 interface HeaderProps {
@@ -13,18 +13,10 @@ interface HeaderProps {
 }
 
 export function Header({ path, searchInputRef }: HeaderProps) {
-  const [favorites, setFavorites] = useState(false)
-  const { isLoggedIn } = useAuth()  
+  const { isLoggedIn } = useAuth()
+  const { favorites } = useFavorites()
 
-  useEffect(() => {
-    if (isLoggedIn) {
-      utils.getAllFavorites().then((data) => {
-        setFavorites(!!data[0])
-      })
-    }
-  }, [isLoggedIn])
-
-  const accessTest = () => {    
+  const accessTest = () => {
     if (!isLoggedIn) {
       return utils.redirectTo('/login')
     }
@@ -56,7 +48,7 @@ export function Header({ path, searchInputRef }: HeaderProps) {
             Account
           </a>
           <a
-            className={`favorite-link ${favorites ? 'alert' : ''}`}
+            className={`favorite-link ${favorites?.length > 0 ? 'alert' : ''}`}
             onClick={() => accessTest()}
           >
             <Image

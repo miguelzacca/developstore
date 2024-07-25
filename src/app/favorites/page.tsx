@@ -2,22 +2,22 @@
 
 import { useEffect, useState } from 'react'
 import { ProductEl } from '@/types/global'
-import { utils } from '@/utils'
-import { AuthProvider } from '@/contexts/AuthContext'
+import { useFavorites } from '@/hooks/useFavorites'
 
 import { ProductsUL } from '@/components/ProductsUL/ProductsUL'
 import { Header } from '@/components/Header/Header'
 
 import '../search/page.scss'
 
-function FavoritesPage() {
+export default function Favorites() {
   const [favorites, setFavorites] = useState<ProductEl[]>([])
+  const { checkFavorites } = useFavorites()
 
   useEffect(() => {
-    utils.getAllFavorites().then((data) => {
-      setFavorites(data)
+    checkFavorites().then((data) => {
+      setFavorites(data.favorites)
     })
-  }, [])
+  }, [checkFavorites])
 
   return (
     <>
@@ -28,13 +28,5 @@ function FavoritesPage() {
         </ul>
       </main>
     </>
-  )
-}
-
-export default function Favorites() {
-  return (
-    <AuthProvider>
-      <FavoritesPage />
-    </AuthProvider>
   )
 }

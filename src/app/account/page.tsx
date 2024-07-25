@@ -4,9 +4,8 @@ import { useEffect, useRef } from 'react'
 import { useAuth } from '@/hooks/useAuth'
 
 import './page.scss'
-import { AuthProvider } from '@/contexts/AuthContext'
 
-function AccountPage() {
+export default function Account() {
   const mainTag = useRef<HTMLElement>(null)
   const { User, checkAuth } = useAuth()
 
@@ -26,13 +25,5 @@ function AccountPage() {
       <h2>{User?.uname}</h2>
       <h3>{User?.email}</h3>
     </main>
-  )
-}
-
-export default function Account() {
-  return (
-    <AuthProvider>
-      <AccountPage />
-    </AuthProvider>
   )
 }

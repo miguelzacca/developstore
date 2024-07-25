@@ -7,6 +7,7 @@ import { utils } from '@/utils'
 import Image from 'next/image'
 
 import './ProductsUL.scss'
+import { useFavorites } from '@/hooks/useFavorites'
 
 interface ProductsULProps {
   products: ProductEl[]
@@ -20,26 +21,21 @@ export function ProductsUL({
   nullMessage,
 }: ProductsULProps) {
   const favoriteBtnRef = useRef<HTMLButtonElement[]>([])
-  const [favorites, setFavorites] = useState<number[]>([])
   const { isLoggedIn } = useAuth()
+  const { favoritesId, checkFavorites } = useFavorites()
 
   const addFavoriteBtnRef = (index: number) => (element: HTMLButtonElement) => {
     favoriteBtnRef.current[index] = element
   }
 
-  const favorite = (index: number, productId: number) => {
+  const favorite = async (index: number, productId: number) => {
     if (isLoggedIn) {
       favoriteBtnRef.current[index].classList.toggle('checked')
-      return utils.toggleFavorite(productId)
+      await utils.toggleFavorite(productId)
+      return checkFavorites()
     }
     utils.redirectTo('/login')
   }
-
-  useEffect(() => {
-    utils.getAllFavorites().then((data) => {
-      setFavorites(data.map((el: ProductEl) => el.id))
-    })
-  }, [])
 
   return (
     <>
@@ -53,7 +49,7 @@ export function ProductsUL({
           >
             <button
               className={`favorite ${
-                favorites.includes(el.id) ? 'checked' : ''
+                favoritesId?.includes(el.id) ? 'checked' : ''
               }`}
               ref={addFavoriteBtnRef(i)}
               onClick={() => favorite(i, el.id)}
