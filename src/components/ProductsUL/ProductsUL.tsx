@@ -2,7 +2,7 @@
 
 import { useAuth } from '@/hooks/useAuth'
 import { ProductEl } from '@/types/global'
-import { useEffect, useRef, useState } from 'react'
+import { useRef } from 'react'
 import { utils } from '@/utils'
 import Image from 'next/image'
 

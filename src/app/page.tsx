@@ -19,7 +19,7 @@ interface Products {
 
 export default function Home() {
   const ulRefs = useRef<HTMLUListElement[]>([])
-  const moveScrollValue = 500
+  const moveScrollValue = 750
 
   const moveScroll = (ul: number, value: number) => {
     ulRefs.current[ul].scrollBy({

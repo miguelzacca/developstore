@@ -32,14 +32,14 @@ function Head() {
 
       {/* SEO */}
       <meta name="author" content="Miguel Zacca" />
+      <link rel="robots" href="/robots.txt" />
+      <link rel="canonical" href="https://developstore.vercel.app" />
       <link
         rel="sitemap"
         type="application/xml"
         title="Sitemap"
         href="/sitemap.xml"
       />
-      <link rel="robots" href="/robots.txt" />
-      <link rel="canonical" href="https://developstore.vercel.app" />
       <meta
         name="description"
         content="Develop Store is the best E-Commerce platform offering a wide range of products."

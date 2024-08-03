@@ -116,9 +116,7 @@ main#Home {
         gap: 1rem;
         font-size: 1.5rem;
         border-radius: 0.5rem;
-        transition:
-          filter 0.3s,
-          scale 0.1s;
+        transition: filter 0.3s, scale 0.1s;
 
         img {
           filter: invert(1);
@@ -188,6 +186,14 @@ main#Home {
 
         &:active {
           animation: outline 0.25s ease-out;
+        }
+      }
+    }
+
+    ul {
+      li {
+        picture {
+          width: 20rem;
         }
       }
     }

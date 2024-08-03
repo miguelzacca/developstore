@@ -23,13 +23,13 @@ class Utils {
     display.classList.toggle('msg-anime')
   }
 
-  public wait = (ms: number) => {
+  wait = (ms: number) => {
     return new Promise((resolve) => {
       setTimeout(resolve, ms)
     })
   }
 
-  public formDataToJson = (formData: FormData) => {
+  formDataToJson = (formData: FormData) => {
     const obj: IObjFromFormData = {}
     for (const [key, value] of formData) {
       obj[key] = value
@@ -37,7 +37,7 @@ class Utils {
     return JSON.stringify(obj)
   }
 
-  public handleMsg = (data: IObjKey, msgRef: RefObject<HTMLDivElement>) => {
+  handleMsg = (data: IObjKey, msgRef: RefObject<HTMLDivElement>) => {
     const display = msgRef.current
     if (!display) {
       throw new Error('Missing msgRef prop.')
@@ -46,7 +46,7 @@ class Utils {
     this.animeMsg(display)
   }
 
-  public getProducts: GetProducts = async (filters) => {
+  getProducts: GetProducts = async (filters) => {
     if (!filters) {
       const res = await fetch(`${API_ADDR}/products`)
       return await res.json()
@@ -63,7 +63,7 @@ class Utils {
     return await res.json()
   }
 
-  public getURLSearchParam = (query: string) => {
+  getURLSearchParam = (query: string) => {
     if (typeof window === 'undefined') return
 
     return location.search
@@ -73,7 +73,7 @@ class Utils {
       .join(' ')
   }
 
-  public getAllFavorites = async () => {
+  getAllFavorites = async () => {
     if (typeof window === 'undefined') return
 
     return await fetch(`${API_ADDR}/user/get-favorites`, {
@@ -83,7 +83,7 @@ class Utils {
     })
   }
 
-  public toggleFavorite = async (productId: number) => {
+  toggleFavorite = async (productId: number) => {
     if (typeof window === 'undefined') return
 
     await fetch(`${API_ADDR}/user/toggle-favorite`, {
@@ -96,7 +96,7 @@ class Utils {
     })
   }
 
-  public redirectTo = (path: string) => {
+  redirectTo = (path: string) => {
     if (typeof window === 'undefined') return
     location.replace(path)
   }

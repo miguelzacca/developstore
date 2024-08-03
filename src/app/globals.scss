@@ -1,8 +1,9 @@
 :root {
   --black: #222;
   --gray: #666;
-  --light-gray: #dfdfdf;
+  --light-gray: #dadada;
   --page-padding: 5rem;
+  --bg-color: #fafafa;
 }
 
 ::-webkit-scrollbar {
@@ -53,10 +54,12 @@ body {
   padding: 0 var(--page-padding);
   width: 100vw;
   height: max-content;
+  background-color: var(--bg-color);
 }
 
 input {
   font-size: 1.5rem;
+  background-color: var(--bg-color);
 }
 
 nav {

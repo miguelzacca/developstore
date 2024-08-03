@@ -9,7 +9,7 @@ main#Auth {
 
   form {
     display: flex;
-    background-color: #fff;
+    background-color: var(--bg-color);
     z-index: 3;
     flex-direction: column;
     position: relative;
@@ -38,7 +38,7 @@ main#Auth {
       font-size: 3rem;
       font-weight: 400;
       margin-bottom: 2rem;
-      color: #fff;
+      color: var(--bg-color);
       padding: 2rem 0;
       width: 100%;
       text-align: center;
