@@ -36,7 +36,7 @@ header {
 
       div {
         display: flex;
-        background-color: #fff;
+        background-color: var(--bg-color);
         box-shadow: 0 0 0.75rem #00000030;
         border-radius: 0.5rem;
         flex-direction: column;

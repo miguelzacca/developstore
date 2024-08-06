@@ -95,7 +95,7 @@ main#Auth {
         transform: translateY(-50%);
         color: var(--gray);
         transition: all 0.2s;
-        background-color: #fff;
+        background-color: var(--bg-color);
         padding: 0 0.5rem;
       }
     }
@@ -119,7 +119,7 @@ main#Auth {
   position: absolute;
   top: 3rem;
   right: 3rem;
-  background-color: #fff;
+  background-color: var(--bg-color);
   z-index: 99;
   border-left: 0.3rem solid #ff4343;
   border-radius: 0.5rem;

@@ -20,14 +20,10 @@ main#Favorites {
     li {
       flex: 1;
       max-width: 20rem;
-    }
 
-    &.loading::before {
-      content: 'Loading...';
-      display: block;
-      font-weight: 400;
-      font-size: 1.7rem;
-      color: var(--black);
+      picture {
+        width: 20rem;
+      }
     }
   }
 }
@@ -40,7 +36,7 @@ main#Favorites {
   }
 }
 
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 450px) {
   ul {
     display: grid;
     grid-template-columns: auto auto;
@@ -48,6 +44,10 @@ main#Favorites {
 
     li {
       width: 17rem;
+
+      picture {
+        width: 17rem !important;
+      }
     }
   }
 }

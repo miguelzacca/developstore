@@ -59,7 +59,7 @@ export default function Search() {
     <>
       <Header path="search" searchInputRef={searchInputRef} />
       <main id="Search">
-        <ul className={isPending ? 'loading' : ''}>
+        <ul>
           <ProductsUL
             products={products}
             nullMessage={isPending ? undefined : '<Empty>'}
