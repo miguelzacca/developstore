@@ -8,7 +8,7 @@ const API_ADDR = process.env.NEXT_PUBLIC_API_ADDR
 interface AuthContextType {
   isLoggedIn: boolean
   User?: UserData
-  checkAuth: () => Promise<boolean>
+  checkAuth: () => Promise<UserData | undefined>
 }
 
 interface AuthProviderType {
@@ -19,16 +19,13 @@ export const AuthContext = createContext<AuthContextType | undefined>(undefined)
 
 export function AuthProvider({ children }: AuthProviderType) {
   const [isLoggedIn, setIsLoggedIn] = useState(false)
-  const [User, setUser] = useState<UserData>()
 
   const checkAuth = useCallback(async () => {
     const res = await fetch(`${API_ADDR}/user`, { credentials: 'include' })
     if (res.ok) {
       setIsLoggedIn(true)
-      setUser(await res.json())
-      return true
+      return res.json()
     }
-    return false
   }, [])
 
   useEffect(() => {
@@ -36,7 +33,7 @@ export function AuthProvider({ children }: AuthProviderType) {
   }, [checkAuth])
 
   return (
-    <AuthContext.Provider value={{ isLoggedIn, User, checkAuth }}>
+    <AuthContext.Provider value={{ isLoggedIn, checkAuth }}>
       {children}
     </AuthContext.Provider>
   )

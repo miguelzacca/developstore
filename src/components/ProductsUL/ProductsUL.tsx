@@ -1,13 +1,7 @@
-'use client'
-
-import { useAuth } from '@/hooks/useAuth'
 import { ProductEl } from '@/types/global'
-import { useRef } from 'react'
-import { utils } from '@/utils'
+import { FavoriteButton } from '../FavoriteButton/FavoriteButton'
 import Image from 'next/image'
-
 import './ProductsUL.scss'
-import { useFavorites } from '@/hooks/useFavorites'
 
 interface ProductsULProps {
   products: ProductEl[]
@@ -20,23 +14,6 @@ export function ProductsUL({
   animation,
   nullMessage,
 }: ProductsULProps) {
-  const favoriteBtnRef = useRef<HTMLButtonElement[]>([])
-  const { isLoggedIn } = useAuth()
-  const { favoritesId, checkFavorites } = useFavorites()
-
-  const addFavoriteBtnRef = (index: number) => (element: HTMLButtonElement) => {
-    favoriteBtnRef.current[index] = element
-  }
-
-  const favorite = async (index: number, productId: number) => {
-    if (isLoggedIn) {
-      favoriteBtnRef.current[index].classList.toggle('checked')
-      await utils.toggleFavorite(productId)
-      return checkFavorites()
-    }
-    utils.redirectTo('/login')
-  }
-
   return (
     <>
       {products[0] ? (
@@ -47,15 +24,7 @@ export function ProductsUL({
               animation ? ({ '--i': i } as React.CSSProperties) : undefined
             }
           >
-            <button
-              className={`favorite ${
-                favoritesId?.includes(el.id) ? 'checked' : ''
-              }`}
-              ref={addFavoriteBtnRef(i)}
-              onClick={() => favorite(i, el.id)}
-            >
-              <div className="favorite-icon"></div>
-            </button>
+            <FavoriteButton index={i} productId={el.id} />
             <picture>
               <Image
                 src={el.img}

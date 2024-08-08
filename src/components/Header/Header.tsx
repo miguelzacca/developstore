@@ -2,10 +2,10 @@
 
 import Image from 'next/image'
 import { SearchInput } from '../SearchInput/SearchInput'
-import './Header.scss'
 import { utils } from '@/utils'
 import { useFavorites } from '@/hooks/useFavorites'
-import { useAuth } from '@/hooks/useAuth'
+
+import './Header.scss'
 
 interface HeaderProps {
   path: string
@@ -13,11 +13,10 @@ interface HeaderProps {
 }
 
 export function Header({ path, searchInputRef }: HeaderProps) {
-  const { isLoggedIn } = useAuth()
   const { favorites } = useFavorites()
 
-  const accessTest = () => {
-    if (!isLoggedIn) {
+  const accessTest = async () => {
+    if (favorites?.length > 0) {
       return utils.redirectTo('/login')
     }
     utils.redirectTo('/favorites')

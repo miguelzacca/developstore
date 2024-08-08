@@ -27,6 +27,7 @@ export function FavoritesProvider({ children }: FavoritesProviderType) {
   const { isLoggedIn } = useAuth()
 
   const checkFavorites = useCallback(async () => {
+    if (!isLoggedIn) return {} as FavoritesData
     const data = await utils.getAllFavorites()
     const payload = {
       favorites: data,
@@ -34,16 +35,14 @@ export function FavoritesProvider({ children }: FavoritesProviderType) {
     }
     setFavoritesData(payload)
     return payload
-  }, [])
+  }, [isLoggedIn])
 
   useEffect(() => {
     const fnHandler = async () => {
-      if (isLoggedIn) {
-        await checkFavorites()
-      }
+      await checkFavorites()
     }
     fnHandler()
-  }, [isLoggedIn, checkFavorites])
+  }, [checkFavorites])
 
   const { favorites, favoritesId } = favoritesData
 

@@ -9,10 +9,11 @@
 ::-webkit-scrollbar {
   background-color: transparent;
   width: 0.5rem;
+  border-radius: 1rem;
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: #000;
+  background-color: #00000020;
 }
 
 a,

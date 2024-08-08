@@ -1,29 +1,32 @@
 'use client'
 
-import { useEffect, useRef } from 'react'
+import { useEffect, useState } from 'react'
 import { useAuth } from '@/hooks/useAuth'
+import { UserData } from '@/types/global'
 
 import './page.scss'
 
 export default function Account() {
-  const mainTag = useRef<HTMLElement>(null)
-  const { User, checkAuth } = useAuth()
+  const { checkAuth } = useAuth()
+  const [user, setUser] = useState<UserData>()
 
   useEffect(() => {
     const checkAuthProcess = async () => {
-      const access = await checkAuth()
-      if (!access) {
+      const result = await checkAuth()
+      if (!result) {
         location.replace('/login')
+        return
       }
+      setUser(result)
     }
 
     checkAuthProcess()
   }, [checkAuth])
 
   return (
-    <main id="Account" ref={mainTag}>
-      <h2>{User?.uname}</h2>
-      <h3>{User?.email}</h3>
+    <main id="Account">
+      <h2>{user?.uname}</h2>
+      <h3>{user?.email}</h3>
     </main>
   )
 }

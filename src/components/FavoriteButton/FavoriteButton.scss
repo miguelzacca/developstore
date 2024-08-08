@@ -1,0 +1,52 @@
+.favorite {
+  width: 2.5rem;
+  aspect-ratio: 1;
+  position: absolute;
+  left: 0.5rem;
+  top: 0.5rem;
+  background-color: var(--bg-color);
+  border-radius: 50%;
+  border: none;
+  display: flex;
+  justify-content: center;
+  z-index: 1;
+  align-items: center;
+  box-shadow: none;
+  transition: box-shadow 0.1s;
+
+  &:hover {
+    box-shadow: 0 0 0.5rem #00000075;
+  }
+
+  &::before,
+  .favorite-icon {
+    width: 1.5rem;
+    aspect-ratio: 1;
+    background-image: url('/images/favorite-icon.webp');
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+
+  &::before {
+    content: '';
+    display: none;
+    background-image: url('/images/favorited-icon.webp');
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  &:active {
+    &::before {
+      display: block;
+      width: 1.8rem;
+    }
+  }
+
+  &.checked {
+    .favorite-icon {
+      background-image: url('/images/favorited-icon.webp');
+    }
+  }
+}

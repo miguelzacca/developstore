@@ -1,45 +1,16 @@
-'use client'
-
-import { useRef, useEffect, useState } from 'react'
 import { utils } from '@/utils'
 import Image from 'next/image'
-import { ProductEl } from '@/types/global'
+import { unstable_cache } from 'next/cache'
 
 import { Header } from '@/components/Header/Header'
+import { ProductsSection } from '@/components/ProductsSection/ProductsSection'
 import { Footer } from '@/components/Footer/Footer'
-import { ProductsUL } from '@/components/ProductsUL/ProductsUL'
 
 import './page.scss'
 
-interface Products {
-  recommended: ProductEl[]
-  popular: ProductEl[]
-  best: ProductEl[]
-}
-
-export default function Home() {
-  const ulRefs = useRef<HTMLUListElement[]>([])
-  const moveScrollValue = 750
-
-  const moveScroll = (ul: number, value: number) => {
-    ulRefs.current[ul].scrollBy({
-      left: value,
-      behavior: 'smooth',
-    })
-  }
-
-  const addUlRef = (index: number) => (element: HTMLUListElement) => {
-    ulRefs.current[index] = element
-  }
-
-  const [products, setProducts] = useState<Products>({
-    recommended: [],
-    popular: [],
-    best: [],
-  })
-
-  useEffect(() => {
-    const fetchProducts = async () => {
+export default async function Home() {
+  const fetchProducts = unstable_cache(
+    async () => {
       const recommendedReq = utils.getProducts({ category: 'Recommended' })
       const popularReq = utils.getProducts({ category: 'Popular 2024' })
       const bestReq = utils.getProducts({ category: 'The best' })
@@ -50,12 +21,13 @@ export default function Home() {
         bestReq,
       ])
 
-      setProducts({ recommended, popular, best })
-    }
+      return { recommended, popular, best }
+    },
+    [],
+    { revalidate: 3600, tags: ['products'] }
+  )
 
-    fetchProducts()
-  }, [])
-
+  const products = await fetchProducts()
   const productsExists = !!products.recommended[0]
 
   return (
@@ -79,8 +51,8 @@ export default function Home() {
               Shopping now
             </button>
           </div>
-          <picture>
-            {productsExists ? (
+          {productsExists ? (
+            <picture>
               <Image
                 src={products.recommended[0].img}
                 width={250}
@@ -88,105 +60,16 @@ export default function Home() {
                 alt="Sale product image"
                 priority
               />
-            ) : null}
-          </picture>
+            </picture>
+          ) : null}
         </div>
-        <section id="recommended-products">
-          <div className="control-container">
-            <h2>Recommended</h2>
-            <div className="scroll-container">
-              <button
-                className="scroll-right"
-                onClick={() => moveScroll(0, -moveScrollValue)}
-              >
-                <Image
-                  src="/images/arrow-left.webp"
-                  width={22.5}
-                  height={20}
-                  alt="Arrow left icon"
-                />
-              </button>
-              <button
-                className="scroll-left"
-                onClick={() => moveScroll(0, moveScrollValue)}
-              >
-                <Image
-                  src="/images/arrow-right.webp"
-                  width={22.5}
-                  height={20}
-                  alt="Arrow right icon"
-                />
-              </button>
-            </div>
-          </div>
-          <ul ref={addUlRef(0)}>
-            <ProductsUL products={products.recommended} animation={true} />
-          </ul>
-        </section>
-        <section id="popular-products">
-          <div className="control-container">
-            <h2>Popular 2024</h2>
-            <div className="scroll-container">
-              <button
-                className="scroll-right"
-                onClick={() => moveScroll(1, -moveScrollValue)}
-              >
-                <Image
-                  src="/images/arrow-left.webp"
-                  width={22.5}
-                  height={20}
-                  alt="Arrow left icon"
-                />
-              </button>
-              <button
-                className="scroll-left"
-                onClick={() => moveScroll(1, moveScrollValue)}
-              >
-                <Image
-                  src="/images/arrow-right.webp"
-                  width={22.5}
-                  height={20}
-                  alt="Arrow right icon"
-                />
-              </button>
-            </div>
-          </div>
-          <ul ref={addUlRef(1)}>
-            <ProductsUL products={products.popular} />
-          </ul>
-        </section>
-        <section id="best-products">
-          <div className="control-container">
-            <h2>The best</h2>
-            <div className="scroll-container">
-              <button
-                className="scroll-right"
-                onClick={() => moveScroll(2, -moveScrollValue)}
-              >
-                <Image
-                  src="/images/arrow-left.webp"
-                  width={22.5}
-                  height={20}
-                  alt="Arrow left icon"
-                />
-              </button>
-              <button
-                className="scroll-left"
-                onClick={() => moveScroll(2, moveScrollValue)}
-              >
-                <Image
-                  src="/images/arrow-right.webp"
-                  width={22.5}
-                  height={20}
-                  alt="Arrow right icon"
-                />
-              </button>
-            </div>
-          </div>
-          <ul ref={addUlRef(2)}>
-            <ProductsUL products={products.best} />
-          </ul>
-        </section>
+        <ProductsSection
+          products={products.recommended}
+          title="Recommended"
+          isFirst={true}
+        />
+        <ProductsSection products={products.popular} title="Popular 2024" />
+        <ProductsSection products={products.best} title="The best" />
       </main>
       <Footer />
     </>

@@ -12,19 +12,13 @@
 
 @keyframes sales-image {
   from {
-    transform: translateX(150%);
+    transform: translateX(100%);
   }
 }
 
 @keyframes outline {
   to {
     outline: 10rem solid #00000000;
-  }
-}
-
-@keyframes intro-li {
-  to {
-    transform: translateY(0);
   }
 }
 
@@ -138,71 +132,12 @@ main#Home {
     }
 
     picture {
-      animation: 1s ease-out sales-image;
+      animation: 0.75s ease-out sales-image;
       display: flex;
       justify-content: center;
       align-items: center;
       height: 100%;
     }
-  }
-
-  section {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-    overflow: hidden;
-
-    h2 {
-      font-size: 2rem;
-      margin-right: auto;
-      font-weight: 400;
-      color: var(--black);
-    }
-
-    .control-container {
-      display: flex;
-    }
-
-    .scroll-container {
-      display: flex;
-      overflow: hidden;
-      border-radius: 0.5rem;
-
-      button {
-        padding: 0 1.5rem;
-        border: none;
-        background-color: transparent;
-        transition: background-color 0.2s;
-        display: flex;
-        align-items: center;
-        filter: invert(0.2);
-        justify-content: center;
-        outline: 0rem solid #00000030;
-
-        &:hover {
-          background-color: #00000030;
-        }
-
-        &:active {
-          animation: outline 0.25s ease-out;
-        }
-      }
-    }
-
-    ul {
-      li {
-        picture {
-          width: 20rem;
-        }
-      }
-    }
-  }
-
-  #recommended-products ul li {
-    animation: 0.5s ease-out forwards intro-li;
-    animation-delay: calc(0.15s * var(--i));
-    transform: translateY(100%);
   }
 }
 

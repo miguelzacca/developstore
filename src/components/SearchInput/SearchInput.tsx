@@ -1,3 +1,5 @@
+'use client'
+
 import { useRef } from 'react'
 import Image from 'next/image'
 
@@ -6,14 +8,9 @@ import './SearchInput.scss'
 interface SearchInputProps {
   id: string
   searchInputRef?: React.MutableRefObject<HTMLInputElement | null>
-  onChangeFunction?: Function
 }
 
-export function SearchInput({
-  id,
-  searchInputRef,
-  onChangeFunction,
-}: SearchInputProps) {
+export function SearchInput({ id, searchInputRef }: SearchInputProps) {
   const redirectRef = useRef<HTMLInputElement>(null)
 
   const redirect = () => {
@@ -21,7 +18,7 @@ export function SearchInput({
       location.replace(
         `/search${
           redirectRef.current?.value && `?set=${redirectRef.current!.value}`
-        }`,
+        }`
       )
     }
   }
