@@ -14,9 +14,12 @@ export function ProductsUL({
   animation,
   nullMessage,
 }: ProductsULProps) {
+  const productsExists =
+    products && Array.isArray(products) ? products[0] : false
+
   return (
     <>
-      {products[0] ? (
+      {productsExists ? (
         products.map((el: ProductEl, i) => (
           <li
             key={el.id}

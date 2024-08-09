@@ -15,7 +15,7 @@ export default function Favorites() {
 
   useEffect(() => {
     checkFavorites().then((data) => {
-      setFavorites(data.favorites)
+      setFavorites(data?.favorites)
     })
   }, [checkFavorites])
 
