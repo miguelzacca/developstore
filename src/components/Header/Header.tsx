@@ -6,6 +6,7 @@ import { utils } from '@/utils'
 import { useFavorites } from '@/hooks/useFavorites'
 
 import './Header.scss'
+import { useAuth } from '@/hooks/useAuth'
 
 interface HeaderProps {
   path: string
@@ -14,9 +15,10 @@ interface HeaderProps {
 
 export function Header({ path, searchInputRef }: HeaderProps) {
   const { favorites } = useFavorites()
+  const { isLoggedIn } = useAuth()
 
   const accessTest = async () => {
-    if (favorites?.length > 0) {
+    if (!isLoggedIn) {
       return utils.redirectTo('/login')
     }
     utils.redirectTo('/favorites')
