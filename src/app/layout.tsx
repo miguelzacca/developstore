@@ -22,6 +22,9 @@ function Head() {
       <meta charSet="UTF-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+      {/* GOOGLE */}
+      <meta name="google-site-verification" content="0cIi9sGJVe-fn2GANdxMVsJYMDPAN_RgTPPpbYgpwbs" />
+
       {/* PWA */}
       <meta name="theme-color" content="#000000" />
       <link
