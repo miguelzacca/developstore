@@ -24,6 +24,7 @@ function Head() {
 
       {/* GOOGLE */}
       <meta name="google-site-verification" content="0cIi9sGJVe-fn2GANdxMVsJYMDPAN_RgTPPpbYgpwbs" />
+      <meta name="google-adsense-account" content="ca-pub-4042088945420809">
 
       {/* PWA */}
       <meta name="theme-color" content="#000000" />
