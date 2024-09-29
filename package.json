@@ -10,7 +10,7 @@
     "restore": "git restore next.config.mjs"
   },
   "dependencies": {
-    "next": "14.2.5",
+    "next": "^14.2.13",
     "react": "^18",
     "react-dom": "^18",
     "sharp": "^0.33.4"

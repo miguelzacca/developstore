@@ -6,7 +6,6 @@ import { utils } from '@/utils'
 import { Header } from '@/components/Header/Header'
 import { ProductEl } from '@/types/global'
 import { ProductsUL } from '@/components/ProductsUL/ProductsUL'
-
 import './page.scss'
 
 export default function Search() {

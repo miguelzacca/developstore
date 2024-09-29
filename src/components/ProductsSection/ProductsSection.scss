@@ -57,7 +57,7 @@ section {
   }
 }
 
-section#first ul li {
+section#first ul li[style]:not(.pre) {
   animation: 0.5s ease-out forwards intro-li;
   animation-delay: calc(0.15s * var(--i));
   transform: translateY(100%);

@@ -42,7 +42,7 @@ main#Favorites {
     grid-template-columns: auto auto;
     gap: 0.5rem !important;
 
-    li {
+    li:not(dialog li) {
       width: 17rem;
 
       picture {

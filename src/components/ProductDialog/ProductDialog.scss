@@ -1,0 +1,141 @@
+@keyframes intro-dialog {
+  0% {
+    opacity: 0.75;
+    transform: translate(-50%, -50%) scale(0.9);
+  }
+}
+
+@keyframes close-dialog {
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.9);
+  }
+}
+
+dialog {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: calc(100vw - 4rem);
+  min-width: 20rem;
+  max-width: 60rem;
+  height: calc(100dvh - calc(100vw / 10));
+  border-radius: 1.5rem;
+  max-height: calc(100dvh - 4rem);
+  min-height: 50rem;
+  background-color: var(--bg-color);
+  animation: 0.25s intro-dialog ease-out;
+  border: 0.1rem solid #00000020;
+  box-shadow: 0 0 1rem #00000050;
+
+  &.close {
+    animation: 0.15s close-dialog ease-out;
+  }
+
+  .buy {
+    position: absolute;
+    bottom: 2rem;
+    left: 2rem;
+  }
+
+  li {
+    width: 100% !important;
+    max-width: none !important;
+    height: 100%;
+    flex-direction: row;
+
+    picture {
+      width: 100% !important;
+      max-width: none !important;
+      height: 100% !important;
+
+      img {
+        scale: 1.5;
+      }
+    }
+
+    .info-container {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+
+      h3 {
+        font-size: 2.3rem !important;
+        text-align: center;
+      }
+
+      p:not(#price) {
+        font-size: 1.6rem !important;
+      }
+    }
+  }
+
+  .shopping {
+    background-color: #000;
+    border: 0.2rem solid transparent;
+    outline: 0;
+    padding: 1.2rem 2.3rem;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+    border-radius: 0.5rem;
+    transition: all 0.3s;
+    position: absolute;
+    bottom: 2rem;
+    right: 2rem;
+
+    &:hover {
+      border: 0.2rem solid #000;
+      color: #000;
+      background-color: var(--bg-color);
+      box-shadow: 0 0 1.5rem #ffffff25;
+    }
+
+    &:active {
+      scale: 0.9;
+    }
+  }
+}
+
+@media screen and (max-width: 450px) {
+  dialog {
+    li {
+      width: 100%;
+    height: 100%;
+      flex-direction: column;
+    
+
+    picture {
+      width: 100% !important;
+      height: 50% !important;
+
+      img {
+        scale: 1;
+      }
+    }
+
+    .info-container {
+      width: 100%;
+      height: calc(50% - 4rem);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+
+      h3 {
+        font-size: 2.3rem !important;
+        text-align: center;
+      }
+
+      p:not(#price) {
+        font-size: 1.6rem !important;
+      }
+    }
+    }
+  }
+}

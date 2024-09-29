@@ -19,6 +19,34 @@ ul {
     background-color: transparent;
   }
 
+  .buy {
+    width: 3rem;
+    aspect-ratio: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    color: #fff;
+    background-color: #000;
+    border-radius: 50%;
+    border: none;
+    position: absolute;
+    right: 0.5rem;
+    bottom: 0.5rem;
+    padding-left: 0.05rem;
+    transition: 0.3s all;
+
+    &:hover:not(&:active) {
+      filter: invert(1);
+      background-color: #444;
+      outline: #000 solid 0.75rem;
+    }
+
+    &:active {
+      transition: 0.1s all;
+    }
+  } 
+
   li {
     list-style: none;
     display: flex;
@@ -60,36 +88,6 @@ ul {
         #price {
           font-weight: 700;
         }
-      }
-    }
-
-    .buy {
-      width: 3rem;
-      aspect-ratio: 1;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-size: 2rem;
-      color: #fff;
-      background-color: #000;
-      border-radius: 50%;
-      border: none;
-      position: absolute;
-      right: 0.5rem;
-      bottom: 0.5rem;
-      padding-left: 0.15rem;
-      transition: 0.3s all;
-
-      &:hover:not(&:active) {
-        filter: invert(1);
-        transform: rotate(360deg);
-        background-color: #444;
-        outline: #000 solid 0.75rem;
-      }
-
-      &:active {
-        transition: 0.1s all;
-        scale: 0.8;
       }
     }
   }
