@@ -3,19 +3,25 @@
 import { ProductEl } from '@/types/global'
 import { FavoriteButton } from '../FavoriteButton/FavoriteButton'
 import Image from 'next/image'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { ProductDialog } from '../ProductDialog/ProductDialog'
+import { utils } from '@/utils'
 
 interface ProductCardProps {
   index: number
   animation?: boolean
   product: ProductEl
+  reverify?: boolean
 }
 
-function CardData({ index, product }: ProductCardProps) {
+function CardData({ index, product, reverify }: ProductCardProps) {
   return (
     <>
-      <FavoriteButton index={index} productId={product.id} />
+      <FavoriteButton
+        index={index}
+        productId={product.id}
+        reverify={reverify}
+      />
       <picture>
         <Image
           src={product.img}
@@ -44,29 +50,35 @@ export function ProductCard({ animation, index, product }: ProductCardProps) {
   const handleOpen = () => {
     setOpen(true)
     setHasOpened(true)
+    utils.setURLSearchParam('view_product', product.id)
   }
+
+  useEffect(() => {
+    const productUrl = utils.getURLSearchParam('view_product')
+    if (productUrl === String(product.id)) {
+      setOpen(true)
+    }
+  }, [product])
 
   return (
     <>
-      {isOpen ? (
+      <li
+        className={hasOpened ? 'pre' : undefined}
+        style={
+          animation ? ({ '--i': index } as React.CSSProperties) : undefined
+        }
+      >
+        <CardData index={index} product={product} />
+        <button className="buy" onClick={handleOpen}>
+          +
+        </button>
+      </li>
+      {isOpen && (
         <ProductDialog openState={setOpen}>
-          <li key={product.id}>
-            <CardData index={index} product={product} />
+          <li>
+            <CardData index={index} product={product} reverify={true} />
           </li>
         </ProductDialog>
-      ) : (
-        <li
-          className={hasOpened ? 'pre' : undefined}
-          key={product.id}
-          style={
-            animation ? ({ '--i': index } as React.CSSProperties) : undefined
-          }
-        >
-          <CardData index={index} product={product} />
-          <button className="buy" onClick={handleOpen}>
-            +
-          </button>
-        </li>
       )}
     </>
   )

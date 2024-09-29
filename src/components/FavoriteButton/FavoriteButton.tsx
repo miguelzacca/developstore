@@ -1,7 +1,7 @@
 'use client'
 
 import { useAuth } from '@/hooks/useAuth'
-import { useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { utils } from '@/utils'
 import { useFavorites } from '@/hooks/useFavorites'
 
@@ -10,12 +10,18 @@ import './FavoriteButton.scss'
 interface FavoriteButtonProps {
   index: number
   productId: number
+  reverify?: boolean
 }
 
-export function FavoriteButton({ index, productId }: FavoriteButtonProps) {
+export function FavoriteButton({
+  index,
+  productId,
+  reverify,
+}: FavoriteButtonProps) {
   const favoriteBtnRef = useRef<HTMLButtonElement[]>([])
   const { isLoggedIn } = useAuth()
-  const { favoritesId } = useFavorites()
+  const { favoritesId, checkFavorites } = useFavorites()
+  const [reFavoritesId, setReFavoriteId] = useState<number[]>()
 
   const addFavoriteBtnRef = (index: number) => (element: HTMLButtonElement) => {
     favoriteBtnRef.current[index] = element
@@ -25,15 +31,26 @@ export function FavoriteButton({ index, productId }: FavoriteButtonProps) {
     if (isLoggedIn) {
       favoriteBtnRef.current[index].classList.toggle('checked')
       await utils.toggleFavorite(productId)
+      if (reverify) {
+        await checkFavorites()
+      }
       return
     }
     utils.redirectTo('/login')
   }
 
+  useEffect(() => {
+    if (reverify) {
+      checkFavorites().then((data) => {
+        setReFavoriteId(data.favoritesId)
+      })
+    }
+  }, [checkFavorites, reverify])
+
   return (
     <button
       className={`favorite ${
-        favoritesId?.includes(productId) ? 'checked' : ''
+        (reFavoritesId || favoritesId)?.includes(productId) ? 'checked' : ''
       }`}
       ref={addFavoriteBtnRef(index)}
       onClick={() => favorite(index, productId)}

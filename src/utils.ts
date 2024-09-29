@@ -73,6 +73,26 @@ class Utils {
       .join(' ')
   }
 
+  setURLSearchParam = (queryName: string, value: any) => {
+    if (typeof window === 'undefined') return
+
+    const andQuery = location.search ? '&' : '?'
+    history.pushState(
+      {},
+      '',
+      `${location.search}${andQuery}${queryName}=${value}`,
+    )
+  }
+
+  removeURLSearchParam = (queryName: string) => {
+    if (typeof window === 'undefined') return
+
+    const query = location.search.replace('?', '&').split('&')
+    const clsQuery = query.filter((q) => !q.includes(queryName))
+    const endQuery = `?${clsQuery.join('&').replace('&', '')}`
+    history.pushState({}, '', endQuery)
+  }
+
   getAllFavorites = async () => {
     if (typeof window === 'undefined') return
 

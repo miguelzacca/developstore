@@ -2,6 +2,7 @@
 
 import { Dispatch, SetStateAction, useEffect, useRef } from 'react'
 import './ProductDialog.scss'
+import { utils } from '@/utils'
 
 interface ProductDialogProps {
   children: JSX.Element
@@ -12,8 +13,9 @@ export function ProductDialog({ children, openState }: ProductDialogProps) {
   const dialogRef = useRef<HTMLDialogElement>(null)
 
   const closeDialog = () => {
+    utils.removeURLSearchParam('view_product')
     dialogRef.current?.classList.add('close')
-    setTimeout(() => { 
+    setTimeout(() => {
       openState(false)
     }, 150)
   }
