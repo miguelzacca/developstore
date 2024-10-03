@@ -49,20 +49,18 @@ export default function Search() {
       return await utils.getProducts(search ? { search } : undefined)
     }
 
-    fetchProducts().then((data) => setProducts(data))
-
-    setPending(false)
+    fetchProducts().then((data) => {
+      setProducts(data)
+      setPending(false)
+    })
   }, [search])
 
   return (
     <>
       <Header path="search" searchInputRef={searchInputRef} />
       <main id="Search">
-        <ul>
-          <ProductsUL
-            products={products}
-            nullMessage={isPending ? undefined : '<Empty>'}
-          />
+        <ul className={isPending ? 'load' : undefined}>
+          <ProductsUL products={products} nullMessage="<Empty>" />
         </ul>
       </main>
     </>

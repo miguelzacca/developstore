@@ -3,7 +3,7 @@
 import Image from 'next/image'
 import { SearchInput } from '../SearchInput/SearchInput'
 import { utils } from '@/utils'
-import { useFavorites } from '@/hooks/useFavorites'
+import { useProducts } from '@/hooks/useProducts'
 
 import './Header.scss'
 import { useAuth } from '@/hooks/useAuth'
@@ -14,7 +14,7 @@ interface HeaderProps {
 }
 
 export function Header({ path, searchInputRef }: HeaderProps) {
-  const { favorites } = useFavorites()
+  const { favorites } = useProducts()
   const { isLoggedIn } = useAuth()
 
   const accessTest = async () => {

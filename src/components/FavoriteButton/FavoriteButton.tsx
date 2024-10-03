@@ -3,7 +3,7 @@
 import { useAuth } from '@/hooks/useAuth'
 import { useEffect, useRef, useState } from 'react'
 import { utils } from '@/utils'
-import { useFavorites } from '@/hooks/useFavorites'
+import { useProducts } from '@/hooks/useProducts'
 
 import './FavoriteButton.scss'
 
@@ -20,7 +20,7 @@ export function FavoriteButton({
 }: FavoriteButtonProps) {
   const favoriteBtnRef = useRef<HTMLButtonElement[]>([])
   const { isLoggedIn } = useAuth()
-  const { favoritesId, checkFavorites } = useFavorites()
+  const { favoritesId, checkFavorites } = useProducts()
   const [reFavoritesId, setReFavoriteId] = useState<number[]>()
 
   const addFavoriteBtnRef = (index: number) => (element: HTMLButtonElement) => {

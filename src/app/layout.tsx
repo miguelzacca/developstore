@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import { Poppins } from 'next/font/google'
 import { AuthProvider } from '@/contexts/AuthContext'
-import { FavoritesProvider } from '@/contexts/FavoritesContext'
+import { ProductsProvider } from '@/contexts/ProductsContext'
 
 import './globals.scss'
 
@@ -64,12 +64,12 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <AuthProvider>
-      <FavoritesProvider>
+      <ProductsProvider>
         <html lang="en">
           <Head />
           <body className={poppins.className}>{children}</body>
         </html>
-      </FavoritesProvider>
+      </ProductsProvider>
     </AuthProvider>
   )
 }

@@ -1,5 +1,6 @@
 import { RefObject } from 'react'
 import { ProductEl } from './types/global'
+import { middleware } from 'func-middleware'
 
 const API_ADDR = process.env.NEXT_PUBLIC_API_ADDR
 
@@ -15,6 +16,12 @@ type GetProducts = (filters?: {
   search?: string
   category?: string
 }) => Promise<ProductEl[]>
+
+const clientSide = () => {
+  if (typeof window === 'undefined') {
+    return false
+  }
+}
 
 class Utils {
   private animeMsg = async (display: Element) => {
@@ -63,49 +70,45 @@ class Utils {
     return await res.json()
   }
 
-  getURLSearchParam = (query: string) => {
-    if (typeof window === 'undefined') return
-
+  getURLSearchParam = middleware((query: string) => {
     return location.search
       ?.split(`${query}=`)[1]
       ?.split('&')[0]
       ?.split('%20')
       .join(' ')
-  }
+  }, clientSide)
 
-  setURLSearchParam = (queryName: string, value: any) => {
-    if (typeof window === 'undefined') return
-
+  setURLSearchParam = middleware((queryName: string, value: any) => {
     const andQuery = location.search ? '&' : '?'
     history.pushState(
       {},
       '',
       `${location.search}${andQuery}${queryName}=${value}`,
     )
-  }
+  }, clientSide)
 
-  removeURLSearchParam = (queryName: string) => {
-    if (typeof window === 'undefined') return
-
+  removeURLSearchParam = middleware((queryName: string) => {
     const query = location.search.replace('?', '&').split('&')
     const clsQuery = query.filter((q) => !q.includes(queryName))
     const endQuery = `?${clsQuery.join('&').replace('&', '')}`
     history.pushState({}, '', endQuery)
-  }
+  }, clientSide)
 
-  getAllFavorites = async () => {
-    if (typeof window === 'undefined') return
-
+  getAllFavorites = middleware(async () => {
     return await fetch(`${API_ADDR}/user/get-favorites`, {
       credentials: 'include',
     }).then(async (res) => {
       return await res.json()
     })
-  }
+  }, clientSide)
 
-  toggleFavorite = async (productId: number) => {
-    if (typeof window === 'undefined') return
+  getAllShopping = middleware(async () => {
+    return await fetch(`${API_ADDR}/user/get-shopping `, {
+      credentials: 'include',
+    }).then((res) => res.json())
+  }, clientSide)
 
+  toggleFavorite = middleware(async (productId: number) => {
     await fetch(`${API_ADDR}/user/toggle-favorite`, {
       method: 'POST',
       headers: {
@@ -114,12 +117,22 @@ class Utils {
       body: JSON.stringify({ productId }),
       credentials: 'include',
     })
-  }
+  }, clientSide)
 
-  redirectTo = (path: string) => {
-    if (typeof window === 'undefined') return
+  toggleShopping = middleware(async (productId: number) => {
+    await fetch(`${API_ADDR}/user/toggle-shopping`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ productId }),
+      credentials: 'include',
+    })
+  }, clientSide)
+
+  redirectTo = middleware((path: string) => {
     location.replace(path)
-  }
+  }, clientSide)
 }
 
 export const utils = new Utils()

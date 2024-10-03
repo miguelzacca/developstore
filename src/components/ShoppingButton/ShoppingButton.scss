@@ -1,0 +1,27 @@
+button.shopping {
+  background-color: #000;
+  border: 0.2rem solid transparent;
+  outline: 0;
+  padding: 1.2rem 2.3rem;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem;
+  border-radius: 0.5rem;
+  transition: all 0.3s;
+  position: absolute;
+  bottom: 2rem;
+  right: 2rem;
+
+  &:hover {
+    border: 0.2rem solid #000;
+    color: #000;
+    background-color: var(--bg-color);
+    box-shadow: 0 0 1.5rem #ffffff25;
+  }
+
+  &:active {
+    scale: 0.9;
+  }
+}

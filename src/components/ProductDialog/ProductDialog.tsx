@@ -1,8 +1,10 @@
 'use client'
 
-import { Dispatch, SetStateAction, useEffect, useRef } from 'react'
+import { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react'
 import './ProductDialog.scss'
 import { utils } from '@/utils'
+import { useAuth } from '@/hooks/useAuth'
+import { ShoppingButton } from '../ShoppingButton/ShoppingButton'
 
 interface ProductDialogProps {
   children: JSX.Element
@@ -11,16 +13,18 @@ interface ProductDialogProps {
 
 export function ProductDialog({ children, openState }: ProductDialogProps) {
   const dialogRef = useRef<HTMLDialogElement>(null)
+  const [productId, setProductId] = useState<number>(0)
 
   const closeDialog = () => {
     utils.removeURLSearchParam('view_product')
     dialogRef.current?.classList.add('close')
     setTimeout(() => {
       openState(false)
-    }, 150)
+    }, 200)
   }
 
   useEffect(() => {
+    setProductId(Number(utils.getURLSearchParam('view_product')))
     dialogRef.current?.showModal()
   }, [])
 
@@ -30,7 +34,7 @@ export function ProductDialog({ children, openState }: ProductDialogProps) {
       <button className="buy" onClick={closeDialog}>
         -
       </button>
-      <button className="shopping">Shopping now</button>
+      <ShoppingButton productId={productId} />
     </dialog>
   )
 }
