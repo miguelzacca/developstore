@@ -91,7 +91,7 @@ header {
     gap: 0.5rem;
   }
 
-  .favorite-link.alert {
+  .alert {
     position: relative;
 
     &::after {
@@ -104,6 +104,10 @@ header {
       top: 0.65rem;
       right: 1.1rem;
       border-radius: 50%;
+    }
+
+    &.shopping-link::after {
+      right: 0.9rem;
     }
   }
 }

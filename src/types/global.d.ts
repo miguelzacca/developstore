@@ -11,5 +11,6 @@ export interface ProductEl {
 export interface UserData {
   uname: string
   email: string
+  profile_image: string
   createdAt: string
 }

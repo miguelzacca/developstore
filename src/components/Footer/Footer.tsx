@@ -25,7 +25,7 @@ export function Footer() {
             alt="Refund icon"
             loading="lazy"
           />
-          NOT REFUND
+          REFUND
         </div>
         <div className="container">
           <Image
@@ -69,34 +69,80 @@ export function Footer() {
           </p>
         </div>
         <div className="payment-methods">
-          <Image
-            src="/images/visa-payment.webp"
-            width={40}
-            height={40}
-            alt="Visa icon"
-            loading="lazy"
-          />
-          <Image
-            src="/images/mastercard-payment.webp"
-            width={40}
-            height={40}
-            alt="Mastercard icon"
-            loading="lazy"
-          />
-          <Image
-            src="/images/pix-payment.webp"
-            width={40}
-            height={40}
-            alt="Pix icon"
-            loading="lazy"
-          />
-          <Image
-            src="/images/stripe-payment.webp"
-            width={40}
-            height={40}
-            alt="Stripe icon"
-            loading="lazy"
-          />
+          <div>
+            <Image
+              src="/images/visa-payment.webp"
+              width={40}
+              height={40}
+              alt="Visa icon"
+              loading="lazy"
+            />
+            <Image
+              src="/images/mastercard-payment.webp"
+              width={40}
+              height={40}
+              alt="Mastercard icon"
+              loading="lazy"
+            />
+            <Image
+              src="/images/pix-payment.webp"
+              width={40}
+              height={40}
+              alt="Pix icon"
+              loading="lazy"
+            />
+            <Image
+              src="/images/paypal-icon.webp"
+              width={32.5}
+              height={32.5}
+              alt="PayPal icon"
+              loading="lazy"
+            />
+            <Image
+              src="/images/stripe-payment.webp"
+              width={40}
+              height={40}
+              alt="Stripe icon"
+              loading="lazy"
+            />
+          </div>
+          <div>
+            <Image
+              src="/images/visa-payment.webp"
+              width={40}
+              height={40}
+              alt="Visa icon"
+              loading="lazy"
+            />
+            <Image
+              src="/images/mastercard-payment.webp"
+              width={40}
+              height={40}
+              alt="Mastercard icon"
+              loading="lazy"
+            />
+            <Image
+              src="/images/pix-payment.webp"
+              width={40}
+              height={40}
+              alt="Pix icon"
+              loading="lazy"
+            />
+            <Image
+              src="/images/paypal-icon.webp"
+              width={32.5}
+              height={32.5}
+              alt="PayPal icon"
+              loading="lazy"
+            />
+            <Image
+              src="/images/stripe-payment.webp"
+              width={40}
+              height={40}
+              alt="Stripe icon"
+              loading="lazy"
+            />
+          </div>
         </div>
         <div className="contact">
           <p className="number">+55 (48) 99664-7429</p>

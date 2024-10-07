@@ -1,23 +1,112 @@
 main#Account {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  display: grid;
-  place-items: center;
-  gap: 1rem;
+  position: relative;
+  height: 50vh;
+  width: 100%;
+  margin-top: 5rem;
 
-  h2,
-  h3 {
-    font-weight: 400;
-    color: var(--black);
+  .profile-container {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+
+    .profile-image {
+      filter: grayscale(1);
+    }
+
+    h2 {
+      font-size: 3rem;
+      font-weight: 400;
+      color: #444;
+    }
+
+    h3 {
+      font-size: 2rem;
+      font-weight: 300;
+      color: var(--gray);
+    }
+
+    h2,
+    h3 {
+      &.load {
+        height: 3rem;
+        margin: 0.9rem;
+        transform: translateX(-1rem);
+        background-image: linear-gradient(120deg, #ddd, #cecece);
+        width: 40rem;
+      }
+    }
+
+    .change-image-container {
+      margin-top: 2rem;
+      display: flex;
+      gap: 1rem;
+
+      input {
+        display: none;
+      }
+
+      label,
+      button {
+        cursor: pointer;
+        padding: 0.8rem 1.6rem;
+        background-color: rgb(6, 192, 6);
+        color: var(--bg-color);
+        font-size: 1.6rem;
+        border-radius: 1rem;
+        border: 0.1rem solid rgb(6, 192, 6);
+        transition: all 0.3s;
+
+        &:hover {
+          background-color: transparent;
+          color: rgb(6, 192, 6);
+        }
+      }
+
+      button {
+        background-color: rgb(228, 3, 3);
+        border: 0.1rem solid rgb(228, 3, 3);
+
+        &:hover {
+          color: rgb(228, 3, 3);
+        }
+      }
+    }
   }
+}
 
-  h2 {
-    font-size: 2rem;
+@media screen and (max-width: 768px) {
+  main#Account {
+    .profile-container {
+      padding-top: 5rem;
+      justify-content: center;
+      flex-direction: column;
+
+      h2,
+      h3 {
+        text-align: center;
+
+        &.load {
+          width: 30rem;
+        }
+      }
+
+      .change-image-container {
+        justify-content: center;
+      }
+    }
   }
+}
 
-  h3 {
-    font-size: 1.2rem;
+@media screen and (max-width: 460px) {
+  main#Account {
+    .profile-container {
+      h2 {
+        font-size: 6vw;
+      }
+
+      h3 {
+        font-size: 4vw;
+      }
+    }
   }
 }

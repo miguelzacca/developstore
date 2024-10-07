@@ -14,14 +14,14 @@ interface HeaderProps {
 }
 
 export function Header({ path, searchInputRef }: HeaderProps) {
-  const { favorites } = useProducts()
+  const { favorites, shopping } = useProducts()
   const { isLoggedIn } = useAuth()
 
-  const accessTest = async () => {
+  const strictRedirect = (path: string) => {
     if (!isLoggedIn) {
       return utils.redirectTo('/login')
     }
-    utils.redirectTo('/favorites')
+    utils.redirectTo(path)
   }
 
   return (
@@ -50,7 +50,7 @@ export function Header({ path, searchInputRef }: HeaderProps) {
           </a>
           <a
             className={`favorite-link ${favorites?.length > 0 ? 'alert' : ''}`}
-            onClick={() => accessTest()}
+            onClick={() => strictRedirect('/favorites')}
           >
             <Image
               src="/images/favorite-icon.webp"
@@ -59,7 +59,10 @@ export function Header({ path, searchInputRef }: HeaderProps) {
               alt="Favorite icon"
             />
           </a>
-          <a href="./shopping" className="shopping-link">
+          <a
+            className={`shopping-link ${shopping?.length > 0 ? 'alert' : ''}`}
+            onClick={() => strictRedirect('/shopping')}
+          >
             <Image
               src="/images/shopping-icon.webp"
               width={20}

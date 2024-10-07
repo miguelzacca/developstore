@@ -10,6 +10,7 @@
     "restore": "git restore next.config.mjs"
   },
   "dependencies": {
+    "browser-image-compression": "^2.0.2",
     "func-middleware": "^3.2.0",
     "next": "^14.2.13",
     "react": "^18",
